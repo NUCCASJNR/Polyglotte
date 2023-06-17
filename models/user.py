@@ -4,7 +4,7 @@ Users module for the Blog
 """
 
 from models.base_model import BaseModel, Base, Column, String
-from sqlalchmey import Text
+from sqlalchemy import Text
 
 class User(BaseModel, Base):
     """
