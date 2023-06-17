@@ -19,11 +19,11 @@ class BaseModel:
     """
 
     id = Column(String(60), primary_key=True,
-            unique=True, nullable=False)
+                unique=True, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow(),
-            nullable=False)
-    updated_at  = Column(DateTime, default=datetime.utcnow(),
-            nullable=False)
+                        nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(),
+                        nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
@@ -36,9 +36,9 @@ class BaseModel:
         else:
             try:
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                                '%Y-%m-%dT%H:%M:%S.%f')
                 kwargs['created_at'] = datetime.strptime(kwargs['created_at'],
-                                                     '%Y-%m-%dT%H:%M:%S.%f')
+                                                         '%Y-%m-%dT%H:%M:%S.%f')
                 del kwargs['__class__']
                 self.__dict__.update(kwargs)
                 for k, v in kwargs.items():

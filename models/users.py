@@ -2,7 +2,7 @@
 """
 Users module for the Blog
 """
-from sqlalchemy.orm import relationship
+
 from models.base_model import BaseModel, Base, Column, String
 from sqlalchmey import Text
 
