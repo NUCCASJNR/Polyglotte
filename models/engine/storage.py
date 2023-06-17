@@ -42,14 +42,14 @@ class Storage:
         BLOG_ENV = getenv("BLOG_ENV")
 
         # Create SQLAlchemy engine instance
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
                                       format(BLOG_MYSQL_USER,
                                              BLOG_MYSQL_PWD,
                                              BLOG_MYSQL_HOST,
                                              BLOG_MYSQL_DB))
         # Drop all tables in the database if in test enviroment
         if getenv('BLOG_ENV') == 'test':
-            Base.metadata.dropall(bind=self.__engine)
+            Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
         """
@@ -91,11 +91,11 @@ class Storage:
         Reloads the current database connection
         """
 
-        Base.metadata.create_all(bind=self.__engine)
+        Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
-        Session = scopped_session(session_factory)
-        self.__session = Session()
+        Session = scoped_session(session_factory)
+        self.__session = Session
 
     def close(self):
         """
