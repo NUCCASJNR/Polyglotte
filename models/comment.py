@@ -4,9 +4,10 @@
 Comments Table for blog posts
 """
 
-from models.base_model import BaseModel, Base, Integer, String
+from models.base_model import BaseModel, Column, Base, Integer, String
 from models.user import User
 from models.blog_post import BlogPost
+from sqlalchemy import ForeignKey, Text
 
 class Comment(BaseModel, Base):
     """

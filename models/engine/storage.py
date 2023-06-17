@@ -6,13 +6,14 @@ Defines the database Storage class
 
 from sqlalchemy import create_engine
 from os import getenv
-from sqlalchemy.orm import sessionmaker, scopped_session
+from sqlalchemy.orm import sessionmaker, scoped_session
+import sqlalchemy
 
 from models.user import User
 from models.comment import Comment
 from models.follower import Follower
 from models.blog_post import BlogPost
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 
 
 classes = {
@@ -103,3 +104,24 @@ class Storage:
         """
 
         self.__session.remove()
+
+    def get(self, cls, id):
+        """
+        Retrieves one object
+        """
+        if cls not in classes.values():
+            return None
+        objects = models.storage.all(cls)
+        for val in objects.values():
+            if (val.id == id):
+                return val
+        return None
+
+    def count(self, cls=None):
+        """
+        count the number of objects in storage:
+        """
+        count = self.all(cls)
+        if cls in classes.values():
+            count = self.all(cls)
+        return len(count)

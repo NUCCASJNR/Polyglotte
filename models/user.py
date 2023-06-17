@@ -11,10 +11,10 @@ class User(BaseModel, Base):
     The User class contains all the user's info
     """
     __tablename__ = 'users'
-    username = Column(string(60), unique=True, nullable=False)
+    username = Column(String(60), unique=True, nullable=False)
     password = Column(String(60), nullable=False)
     email = Column(String(60), unique=True, nullable=False)
     first_name = Column(String(60), nullable=False)
-    last_name = Column(string(60), nullable=False)
-    profile_picture_url = Column(60)
+    last_name = Column(String(60), nullable=False)
+    profile_picture_url = Column(String(60))
     biography = Column(Text)

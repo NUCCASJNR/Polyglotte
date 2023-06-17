@@ -6,7 +6,7 @@ This module handles info about a specific blog post
 
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Column, String, Base, Integer
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Text
 from models.user import User
 
 class BlogPost(BaseModel, Base):
@@ -19,3 +19,4 @@ class BlogPost(BaseModel, Base):
     content = Column(Text, nullable=False)
     likes_count = Column(Integer)
     views_count = Column(Integer)
+    user = relationship('User')
