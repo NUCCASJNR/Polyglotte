@@ -57,16 +57,20 @@ class Storage:
         query the current database session
         """
         query_dict = {}
+
         if cls:
             objs = self.__session.query(cls)
             for obj in objs:
-                query_dict[obj.__class__.__name__ + '.' + obj.id] = obj
+                query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
+
         else:
             for key, value in classes.items():
                 objs = self.__session.query(value)
                 for obj in objs:
-                    query_dict[obj.__class__.__name__ + '.' + obj.id] = obj
+                    query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
+
         return query_dict
+
 
     def new(self, obj):
         """
