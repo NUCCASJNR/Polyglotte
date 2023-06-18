@@ -9,7 +9,7 @@ from models.user import User
 @app_views.route("/users", methods=["GET"], strict_slashes=False)
 def get_users():
     """
-    Docs later
+    Docs soon 
     """
 
     users_list = []
