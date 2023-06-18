@@ -53,23 +53,16 @@ class Storage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        """
-        query the current database session
-        """
-        query_dict = {}
-
-        if cls:
-            objs = self.__session.query(cls)
-            for obj in objs:
-                query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
-
-        else:
-            for key, value in classes.items():
-                objs = self.__session.query(value)
+        """query on the current database session"""
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
                 for obj in objs:
-                    query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
+        return (new_dict)
 
-        return query_dict
 
 
     def new(self, obj):
