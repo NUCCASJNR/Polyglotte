@@ -63,8 +63,6 @@ class Storage:
                     new_dict[key] = obj
         return (new_dict)
 
-
-
     def new(self, obj):
         """
         Adds the new obj to database
