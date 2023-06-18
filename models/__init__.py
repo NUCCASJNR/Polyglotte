@@ -11,4 +11,4 @@ from models.comment import Comment
 from models.follower import Follower
 storage = Storage()
 storage.reload()
-storage.all()
+all_objects = storage.all()

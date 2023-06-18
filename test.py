@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 from models.engine.storage import Storage
 from models.user import User
+from models.blog_post import BlogPost
 from models.engine.storage import Storage
 
 # Create an instance of the Storage class
@@ -12,6 +13,7 @@ storage.reload()
 # Access the session to perform database operations
 session = storage.session
 
+post = BlogPost(
 # Example: Create a new user
 user = User(name="John Doe", email="johndoe@example.com")
 session.add(user)

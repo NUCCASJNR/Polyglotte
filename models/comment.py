@@ -15,6 +15,6 @@ class Comment(BaseModel, Base):
     """
     
     __tablename__ = 'comments'
-    post_id = Column(Integer, ForeignKey('blog_post.id'))
-    user_id = Column(Integer, ForeignKey('users.id'))
+    post_id = Column(String(60), ForeignKey('blog_post.id'))
+    user_id = Column(String(60), ForeignKey('users.id'))
     content = Column(Text)

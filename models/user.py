@@ -5,6 +5,7 @@ Users module for the Blog
 
 from models.base_model import BaseModel, Base, Column, String
 from sqlalchemy import Text
+from sqlalchemy.orm import relationship
 
 class User(BaseModel, Base):
     """
@@ -18,3 +19,4 @@ class User(BaseModel, Base):
     last_name = Column(String(60), nullable=False)
     profile_picture_url = Column(String(60))
     biography = Column(Text)
+    blog_posts = relationship('BlogPost', back_populates='user')
