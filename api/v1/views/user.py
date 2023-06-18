@@ -66,3 +66,21 @@ def post_user():
         setattr(user, key, value)
     user.save()
     return jsonify(user.to_dict()), 201
+
+@app_views.route("/users/<user_id>", methods=["PUT"], strict_slashes=False)
+def update_user(user_id):
+    """
+    Updates a user using the provided user_id
+    """
+    user = storage.get(User, user_id)
+    user_data = request.get_json()
+    if not user_data:
+        return jsonify({"Error": "Not a json"})
+    ignore = ["id", "created_at", "updated_at"]
+    if user:
+        for key, value in user_data.items():
+            if key not in ignore:
+                setattr(user, key, value)
+        user.save()
+        return jsonify(user.to_dict()), 200
+    abort(404)
