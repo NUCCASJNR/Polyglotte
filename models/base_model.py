@@ -8,7 +8,7 @@ every other models to inherit from
 import uuid
 from datetime import datetime
 from sqlalchemy.orm import declarative_base
-
+import models
 from sqlalchemy import Column, String, Integer, DateTime
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
@@ -75,5 +75,4 @@ class BaseModel:
         return new_dict
 
     def delete(self):
-        from models import storage
-        storage.delete(self)
+        models.storage.delete(self)
