@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 import sqlalchemy
-
+import models
 from models.user import User
 from models.comment import Comment
 from models.follower import Follower
