@@ -49,6 +49,18 @@ def post_user():
     """
 
     user_data = request.get_json()
+    if not user_data:
+        return jsonify({"Error": "Not a json"}) 
+    if 'username' not in user_data:
+        return jsonify({"Error": "Missing username"})
+    if 'first_name' not in user_data:
+        return jsonify({"Error": "Mising first name"})
+    if 'last_name' not in user_data:
+        return jsonify({"Error": "Missing lastname"})
+    if 'password' not in user_data:
+        return jsonify({"Error": "Missing password"})
+    if "email" not in user_data:
+        return jsonify({"Error": "Missing email"})
     user = User()
     for key, value in user_data.items():
         setattr(user, key, value)
