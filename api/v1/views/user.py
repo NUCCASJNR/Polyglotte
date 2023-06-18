@@ -18,6 +18,30 @@ def get_users():
         users_list.append(user.to_dict())
     return jsonify(users_list)
 
+@app_views.route("/users/<user_id>", methods=["DELETE"],
+                 strict_slashes=False)
+def delete_user_using_userid(user_id):
+    """
+    Deletes user using the user_id
+    """
+    user = storage.get(User, user_id)
+    if user:
+        user.delete()
+        storage.save()
+        return jsonify({"Status": "Deleted"})
+    abort(404)
+
+@app_views.route("/users/<user_id>", methods=["GET"],
+                 strict_slashes=False)
+def get_user_using_userid(user_id):
+    """
+    Gets user using the user_id
+    """
+    user = storage.get(User, user_id)
+    if user:
+        return jsonify(user.to_dict())
+    abort(404)
+
 @app_views.route("/users", methods=["POST"], strict_slashes=False)
 def post_user():
     """
