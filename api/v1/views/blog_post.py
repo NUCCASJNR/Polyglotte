@@ -64,7 +64,7 @@ def delete_all_posts_of_a_user(user_id):
     if user:
         for post in storage.all(BlogPost).values():
             if post.user_id == user_id:
-                storage.delete(user)
+                user.delete()
                 storage.save()
         return jsonify({"status": "Post deleted"})     
     abort(404)
