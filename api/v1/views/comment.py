@@ -19,3 +19,4 @@ def get_comments():
     for comment in comments.values():
         comment_list.append(comment.to_dict())
     return jsonify(comment_list)
+
