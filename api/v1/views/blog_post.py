@@ -78,6 +78,12 @@ def post_blogpost():
     post_data = request.get_json()
     if not post_data:
         return jsonify({"error": "Not a JSON"})
+    if 'user_id' not in post_data:
+        return jsonify({"error": "Missing user_id"})
+    if 'content' not in post_data:
+        return jsonify({"error": "Missing Blog Post content"})
+    if 'title' not in post_data:
+        return jsonify({"error": "Missing Blog Post title"})
     post = BlogPost()
     for key, value in post_data.items():
         setattr(post, key, value)
