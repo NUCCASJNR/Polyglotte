@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+ #!/usr/bin/python3
 """
 API routes for blog posts
 """
@@ -107,4 +107,4 @@ def update_posts(post_id):
                 setattr(post, key, value)
         post.save()
         return jsonify(post.to_dict()), 200
-    abort(404)
+    abort(404)   
