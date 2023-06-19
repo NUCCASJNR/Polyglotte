@@ -89,3 +89,22 @@ def post_blogpost():
         setattr(post, key, value)
     post.save()
     return jsonify(post.to_dict()), 201
+
+@app_views.route("/posts/<post_id>", methods=["PUT"],
+                  strict_slashes=False)
+def update_posts(post_id):
+    """
+    Updates a Blog Post
+    """
+    post = storage.get(BlogPost, post_id)
+    post_data = request.get_json()
+    if not post_data:
+        return jsonify({"error": "Not a JSON"})
+    ignore = ["id", "created_at", "updated_at"]
+    if post:
+        for key, value in post_data.items():
+            if key not in ignore:
+                setattr(post, key, value)
+        post.save()
+        return jsonify(post.to_dict()), 200
+    abort(404)
