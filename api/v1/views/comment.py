@@ -20,3 +20,27 @@ def get_comments():
         comment_list.append(comment.to_dict())
     return jsonify(comment_list)
 
+@app_views.route("/posts/<post_id>/comments", methods=["POST"],
+                 strict_slashes=False)
+def post_comment(post_id):
+    """
+    Posts a New comment
+    """
+    comment_list = []
+    post = storage.get(BlogPost, post_id)
+    post_data = request.get_json()
+    if not post_data:
+        return jsonify({"error": "Not a JSON"})
+    if "user_id" not in post_data:
+        return jsonify({"error": "Missing user_id"})
+    if "post_id" not in post_data:
+        return jsonify({"error": "Missing post_id"})
+    if "content" not in post_data:
+        return jsonify({"error": "Missing Comment content"})
+    if not post:
+        abort(404)
+    comment = Comment()
+    for key, value in post_data.items():
+        setattr(comment, key, value)
+    comment.save()
+    return jsonify(comment.to_dict()), 201
