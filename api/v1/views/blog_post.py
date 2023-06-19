@@ -30,6 +30,7 @@ def get_blogpost_using_postid(post_id):
     abort(404)
 
 
+
 @app_views.route("/posts", methods=["POST"], strict_slashes=False)
 def post_blogpost():
     """
