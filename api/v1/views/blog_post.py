@@ -19,6 +19,15 @@ def get_blogposts():
         posts_list.append(post.to_dict())
     return jsonify(posts_list)
 
+@app_views.route("/posts/<post_id>", methods=["GET"], strict_slashes=False)
+def get_blogpost_using_postid(post_id):
+    """
+    Retrieves a post using the post id
+    """
+    posts = storage.get(BlogPost, post_id)
+    if posts:
+        return jsonify(posts.to_dict())
+    abort(404)
 @app_views.route("/posts", methods=["POST"], strict_slashes=False)
 def post_blogpost():
     """
