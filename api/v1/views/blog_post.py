@@ -29,8 +29,24 @@ def get_blogpost_using_postid(post_id):
         return jsonify(posts.to_dict())
     abort(404)
 
-
-
+@app_views.route("/posts/<user_id>/posts", methods=["GET"], strict_slashes=False)
+def get_all_posts_of_user(user_id):
+    # k = 'User.{}'.format(user_id)
+    # posts =[]
+    # if k not in storage.all(User):
+    #     abort(404)
+    # for value in storage.all(BlogPost).values():
+    #     if value.to_dict()['user_id'] == user_id:
+    #         posts.append(value.to_dict())
+    # return jsonify(posts)
+    post_list = []
+    user = storage.get(User, user_id)
+    if user:
+        for post in storage.all(BlogPost).values():
+            if post.user_id == user_id:
+                post_list.append(post.to_dict())
+        return jsonify(post_list), 200
+    abort(404)
 @app_views.route("/posts", methods=["POST"], strict_slashes=False)
 def post_blogpost():
     """
