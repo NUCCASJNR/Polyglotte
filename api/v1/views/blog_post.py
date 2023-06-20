@@ -86,6 +86,8 @@ def post_blogpost():
         return jsonify({"error": "Missing Blog Post content"})
     if 'title' not in post_data:
         return jsonify({"error": "Missing Blog Post title"})
+    if 'category' not in post_data:
+        return jsonify({"error": "Missing Blog Category"})
     post = BlogPost()
     for key, value in post_data.items():
         setattr(post, key, value)
