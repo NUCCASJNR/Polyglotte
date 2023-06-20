@@ -6,6 +6,7 @@ HAndles All APIs for comments
 from models import storage
 from models.comment import Comment
 from models.blog_post import BlogPost
+from models.user import User
 from flask import jsonify, abort, request
 from api.v1.views import app_views
 
@@ -61,6 +62,23 @@ def get_all_comments_of_a_post(post_id):
         return jsonify(comments_list)
     abort(404)
     
+
+@app_views.route("/posts/<user_id>/<post_id>/comments", methods=["GET"],
+                  strict_slashes=False)
+def get_comments_of_user_on_a_post(user_id, post_id):
+    """
+    Gets all the comments made on a post by a user
+    """
+    comments_list = []
+    user = storage.get(User, user_id)
+    post = storage.get(BlogPost, post_id)
+    if user and post:
+        for comment in storage.all(Comment).values():
+            if comment.user_id == user_id and comment.post_id == post_id:
+                comments_list.append(comment.to_dict())
+        return jsonify(comments_list)
+    abort(404)
+
 
 @app_views.route("/posts/<post_id>/comments", methods=["POST"],
                  strict_slashes=False)
