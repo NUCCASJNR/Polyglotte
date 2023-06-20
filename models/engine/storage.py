@@ -14,13 +14,14 @@ from models.comment import Comment
 from models.follower import Follower
 from models.blog_post import BlogPost
 from models.base_model import BaseModel, Base
-
+from models.following import Following
 
 classes = {
         "user": User,
         "comment": Comment,
         "blog_post": BlogPost,
-        "follower": Follower
+        "follower": Follower,
+        "following": Following
     }
 
 class Storage:
