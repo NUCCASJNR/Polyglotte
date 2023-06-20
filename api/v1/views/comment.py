@@ -20,6 +20,17 @@ def get_comments():
         comment_list.append(comment.to_dict())
     return jsonify(comment_list)
 
+@app_views.route("/comments/<comment_id>", methods=["GET"], strict_slashes=False)
+def get_one_comment(comment_id):
+    """
+    Retrieves one comment using the comment id
+    """
+    comment = storage.get(Comment, comment_id)
+    if comment:
+        return jsonify(comment.to_dict())
+    abort(404)
+
+
 @app_views.route("/posts/<post_id>/comments", methods=["POST"],
                  strict_slashes=False)
 def post_comment(post_id):
