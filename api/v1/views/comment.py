@@ -20,6 +20,7 @@ def get_comments():
         comment_list.append(comment.to_dict())
     return jsonify(comment_list)
 
+
 @app_views.route("/comments/<comment_id>", methods=["GET"], strict_slashes=False)
 def get_one_comment(comment_id):
     """
@@ -43,6 +44,23 @@ def delete_one_comment(comment_id):
         storage.save()
         return jsonify({"Status": "Comment Successfully deleted!"})
     abort(404)
+
+
+@app_views.route("/posts/<post_id>/comments", methods=["GET"],
+                  strict_slashes=False)
+def get_all_comments_of_a_post(post_id):
+    """
+    Gets all the comments made on a post
+    """
+    comments_list = []
+    post = storage.get(BlogPost, post_id)
+    if post:
+        for comment in storage.all(Comment).values():
+            if comment.post_id == post_id:
+                comments_list.append(comment.to_dict())
+        return jsonify(comments_list)
+    abort(404)
+    
 
 @app_views.route("/posts/<post_id>/comments", methods=["POST"],
                  strict_slashes=False)
