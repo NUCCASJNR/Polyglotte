@@ -2,11 +2,13 @@
 """
 API routes for blog posts
 """
-from models import storage
-from models.user import User
-from models.blog_post import BlogPost
-from flask import jsonify, abort, make_response, request
+from flask import abort, jsonify, make_response, request
+
 from api.v1.views import app_views
+from models import storage
+from models.blog_post import BlogPost
+from models.user import User
+
 
 @app_views.route("/posts", methods=["GET"], strict_slashes=False)
 def get_blogposts():

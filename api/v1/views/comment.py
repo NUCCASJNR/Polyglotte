@@ -3,12 +3,14 @@
 """
 HAndles All APIs for comments
 """
-from models import storage
-from models.comment import Comment
-from models.blog_post import BlogPost
-from models.user import User
-from flask import jsonify, abort, request
+from flask import abort, jsonify, request
+
 from api.v1.views import app_views
+from models import storage
+from models.blog_post import BlogPost
+from models.comment import Comment
+from models.user import User
+
 
 @app_views.route("/comments", methods=["GET"], strict_slashes=False)
 def get_comments():
