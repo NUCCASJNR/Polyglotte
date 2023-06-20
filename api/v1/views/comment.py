@@ -31,6 +31,19 @@ def get_one_comment(comment_id):
     abort(404)
 
 
+@app_views.route("/comments/<comment_id>", methods=["DELETE"], strict_slashes=False)
+def delete_one_comment(comment_id):
+    """
+    Deletes a Comment using the comment id
+    """
+
+    comment = storage.get(Comment, comment_id)
+    if comment:
+        comment.delete()
+        storage.save()
+        return jsonify({"Status": "Comment Successfully deleted!"})
+    abort(404)
+
 @app_views.route("/posts/<post_id>/comments", methods=["POST"],
                  strict_slashes=False)
 def post_comment(post_id):
