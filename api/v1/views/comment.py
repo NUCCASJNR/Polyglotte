@@ -63,7 +63,6 @@ def get_all_comments_of_a_post(post_id):
     abort(404)
     
 
-
 @app_views.route("/posts/<user_id>/<post_id>/comments", methods=["GET"],
                   strict_slashes=False)
 def get_comments_of_user_on_a_post(user_id, post_id):
@@ -79,6 +78,7 @@ def get_comments_of_user_on_a_post(user_id, post_id):
                 comments_list.append(comment.to_dict())
         return jsonify(comments_list)
     abort(404)
+
 
 
 @app_views.route("/posts/<post_id>/comments", methods=["POST"],
@@ -105,3 +105,23 @@ def post_comment(post_id):
         setattr(comment, key, value)
     comment.save()
     return jsonify(comment.to_dict()), 201
+
+
+@app_views.route("/comments/<comment_id>", methods=["PUT"],
+                 strict_slashes=False)
+def update_comments(comment_id):
+    """
+    Edit comments on a post
+    """
+    comment = storage.get(Comment, comment_id)
+    comment_data = request.get_json()
+    if not comment_data:
+        return jsonify({"error": "Not a JSON"})
+    ignore = ["id", "created_at", "updated_at"]
+    if comment:
+        for key, value in comment_data.items():
+            if key not in ignore:
+                setattr(comment, key, value)
+        comment.save()
+        return jsonify(comment.to_dict()), 200
+    abort(404)   
