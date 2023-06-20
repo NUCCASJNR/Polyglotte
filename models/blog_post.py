@@ -14,7 +14,7 @@ class BlogPost(BaseModel, Base):
     Blog post Class for all blog posts
     """
     __tablename__ = 'blog_post'
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    user_id = Column(String(60), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     title = Column(String(255), nullable=False)
     content = Column(Text, nullable=False)
     likes_count = Column(Integer)

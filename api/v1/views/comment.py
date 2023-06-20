@@ -63,6 +63,7 @@ def get_all_comments_of_a_post(post_id):
     abort(404)
     
 
+
 @app_views.route("/posts/<user_id>/<post_id>/comments", methods=["GET"],
                   strict_slashes=False)
 def get_comments_of_user_on_a_post(user_id, post_id):
