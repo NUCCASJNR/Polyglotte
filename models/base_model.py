@@ -7,9 +7,11 @@ every other models to inherit from
 
 import uuid
 from datetime import datetime
+
+from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import declarative_base
+
 import models
-from sqlalchemy import Column, String, Integer, DateTime
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
 Base = declarative_base()

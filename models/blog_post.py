@@ -4,10 +4,12 @@
 This module handles info about a specific blog post
 """
 
-from sqlalchemy.orm import relationship
-from models.base_model import BaseModel, Column, String, Base, Integer
 from sqlalchemy import ForeignKey, Text
+from sqlalchemy.orm import relationship
+
+from models.base_model import Base, BaseModel, Column, Integer, String
 from models.user import User
+
 
 class BlogPost(BaseModel, Base):
     """

@@ -4,17 +4,19 @@
 Defines the database Storage class
 """
 
-from sqlalchemy import create_engine
 from os import getenv
-from sqlalchemy.orm import sessionmaker, scoped_session
+
 import sqlalchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+
 import models
-from models.user import User
+from models.base_model import Base, BaseModel
+from models.blog_post import BlogPost
 from models.comment import Comment
 from models.follower import Follower
-from models.blog_post import BlogPost
-from models.base_model import BaseModel, Base
 from models.following import Following
+from models.user import User
 
 classes = {
         "user": User,

@@ -4,9 +4,11 @@
 This module handles the followers of a particular User
 """
 
-from models.base_model import BaseModel, Base, Integer, Column, String
-from models.user import User, relationship
 from sqlalchemy import ForeignKey
+
+from models.base_model import Base, BaseModel, Column, Integer, String
+from models.user import User, relationship
+
 
 class Follower(BaseModel, Base):
     """

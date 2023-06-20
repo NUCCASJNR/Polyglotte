@@ -3,9 +3,11 @@
 Users module for the Blog
 """
 
-from models.base_model import BaseModel, Base, Column, String, Integer
 from sqlalchemy import Text
 from sqlalchemy.orm import relationship
+
+from models.base_model import Base, BaseModel, Column, Integer, String
+
 
 class User(BaseModel, Base):
     """

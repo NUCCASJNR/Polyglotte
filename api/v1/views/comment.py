@@ -102,7 +102,7 @@ def post_comment(post_id):
         return jsonify({"error": "Missing Comment content"})
     if not post:
         abort(404)
-    comment = Comment()
+    comment = Comment()                                       
     for key, value in post_data.items():
         setattr(comment, key, value)
     comment.save()
