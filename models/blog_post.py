@@ -19,4 +19,18 @@ class BlogPost(BaseModel, Base):
     content = Column(Text, nullable=False)
     likes_count = Column(Integer)
     views_count = Column(Integer)
+    picture = Column(String(256))
     user = relationship('User', back_populates='blog_posts')
+    category = Column(String(60), nullable=False)
+
+    def increment_likes(self):
+        """
+        Adds a new like to a blog post
+        """
+        self.likes_count += 1
+
+    def increment_views(self):
+        """
+        Adds a New View to a Blog Post
+        """
+        self.views_count += 1

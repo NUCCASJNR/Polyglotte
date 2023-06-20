@@ -17,8 +17,8 @@ class User(BaseModel, Base):
     email = Column(String(128), unique=True, nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
-    profile_picture_url = Column(String(128))
-    biography = Column(Text)
+    picture = Column(String(128))
+    bio = Column(Text)
     no_followers = Column(Integer, default=0)
     no_following = Column(Integer, default=0)
     blog_posts = relationship('BlogPost', back_populates='user')
@@ -26,7 +26,13 @@ class User(BaseModel, Base):
     following = relationship('Following', back_populates='user')
 
     def increment_followers_count(self):
+        """
+        Increments the number of follower of a user by 1
+        """
         self.no_followers += 1
 
     def increment_following_count(self):
+        """
+        Increments the number of users a user is following by 1
+        """
         self.no_following += 1
