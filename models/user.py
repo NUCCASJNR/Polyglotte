@@ -38,3 +38,7 @@ class User(BaseModel, Base):
         Increments the number of users a user is following by 1
         """
         self.no_following += 1
+    # def decrement_followers_count(self):
+    #     """
+    #     Decrement
+    #     """

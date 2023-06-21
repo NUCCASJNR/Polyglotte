@@ -15,5 +15,5 @@ class Follower(BaseModel, Base):
     Followers class
     """
     __tablename__ = 'followers'
-    followed_user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+    followed_user_id = Column(String(60), ForeignKey('users.id'), nullable=False, unique=True)
     user = relationship('User', back_populates='followers')
