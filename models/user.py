@@ -41,6 +41,12 @@ class User(BaseModel, Base):
 
     def decrement_followers_count(self):
         """
-        Decrement the number of users a user is following by 1
+        Decrement the number of follower of a user 1
         """
         self.no_followers -= 1
+
+    def decrement_following_count(self):
+        """
+        Decrements the number of users a user is following by 1
+        """
+        self.no_following -= 1
