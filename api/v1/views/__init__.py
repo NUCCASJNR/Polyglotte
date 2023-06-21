@@ -9,3 +9,4 @@ from api.v1.views.comment import *
 from api.v1.views.follower import *
 from api.v1.views.stats import *
 from api.v1.views.user import *
+from api.v1.views.following import *

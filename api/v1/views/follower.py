@@ -70,10 +70,7 @@ def get_followers(user_id):
     Gets followers of a User
     """
     user = storage.get(User, user_id)
-    follow_list = []
     if user:
-        for follower in storage.all(Follower).values():
-            if follower.followed_user_id == user_id:
-                follow_list.append(follower.to_dict())
-        return jsonify(follow_list)
+        followers_count = user.no_followers
+        return jsonify(followers_count)
     abort(404)
