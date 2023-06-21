@@ -60,3 +60,20 @@ def unfollow(user_id):
         new_user.decrement_followers_count()
         follow.save()
         return jsonify(follow.to_dict()), 201
+    abort(404)
+
+
+@app_views.route("/users/<user_id>/followers", methods=["GET"],
+                 strict_slashes=False)
+def get_followers(user_id):
+    """
+    Gets followers of a User
+    """
+    user = storage.get(User, user_id)
+    follow_list = []
+    if user:
+        for follower in storage.all(Follower).values():
+            if follower.followed_user_id == user_id:
+                follow_list.append(follower.to_dict())
+        return jsonify(follow_list)
+    abort(404)
