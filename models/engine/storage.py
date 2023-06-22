@@ -123,3 +123,11 @@ class Storage:
         if cls in classes.values():
             count = self.all(cls)
         return len(count)
+
+    def query(self, cls, attribute, value):
+        if cls not in classes.values():
+            return None
+        try:
+            return self.__session.query(cls).filter(getattr(cls, attribute) == value).first()
+        except sqlalchemy.exc.InvalidRequestError:
+            return None
