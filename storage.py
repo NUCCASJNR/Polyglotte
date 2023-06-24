@@ -4,6 +4,7 @@
 Defines the database Storage class
 """
 
+from models import storage
 from sqlalchemy import create_engine
 from os import getenv
 from sqlalchemy.orm import sessionmaker, scoped_session
@@ -15,13 +16,13 @@ from models.follower import Follower
 from models.blog_post import BlogPost
 from models.base_model import BaseModel, Base
 
-
 classes = {
-        "user": User,
-        "comment": Comment,
-        "blog_post": BlogPost,
-        "follower": Follower
-    }
+    "user": User,
+    "comment": Comment,
+    "blog_post": BlogPost,
+    "follower": Follower
+}
+
 
 class Storage:
     """
@@ -36,18 +37,24 @@ class Storage:
         Init method
         """
         # Get enviroment variables
-        BLOG_MYSQL_USER = getenv("BLOG_MYSQL_USER")
-        BLOG_MYSQL_PWD = getenv("BLOG_MYSQL_PWD")
-        BLOG_MYSQL_HOST = getenv("BLOG_MYSQL_HOST")
-        BLOG_MYSQL_DB = getenv("BLOG_MYSQL_DB")
-        BLOG_ENV = getenv("BLOG_ENV")
+        # BLOG_MYSQL_USER = getenv("BLOG_MYSQL_USER")
+        # BLOG_MYSQL_PWD = getenv("BLOG_MYSQL_PWD")
+        # BLOG_MYSQL_HOST = getenv("BLOG_MYSQL_HOST")
+        # BLOG_MYSQL_DB = getenv("BLOG_MYSQL_DB")
+        # BLOG_ENV = getenv("BLOG_ENV")
 
         # Create SQLAlchemy engine instance
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(BLOG_MYSQL_USER,
-                                             BLOG_MYSQL_PWD,
-                                             BLOG_MYSQL_HOST,
-                                             BLOG_MYSQL_DB))
+        # self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+        #                               format(BLOG_MYSQL_USER,
+        #                                      BLOG_MYSQL_PWD,
+        #                                      BLOG_MYSQL_HOST,
+        #                                      BLOG_MYSQL_DB))
+        # # Drop all tables in the database if in test enviroment
+        # if getenv('BLOG_ENV') == 'test':
+        #     Base.metadata.drop_all(bind=self.__engine)
+
+        self.__engine = create_engine('mysql+mysqldb://blog_dev:blog_dev_pwd@localhost:3306/blog_dev_db')
+
         # Drop all tables in the database if in test enviroment
         if getenv('BLOG_ENV') == 'test':
             Base.metadata.drop_all(bind=self.__engine)
@@ -61,16 +68,15 @@ class Storage:
         if cls:
             objs = self.__session.query(cls)
             for obj in objs:
-                query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
+                query_dict[obj.__class__.__name__ + '.' + obj.id] = obj
 
         else:
             for key, value in classes.items():
                 objs = self.__session.query(value)
                 for obj in objs:
-                    query_dict[obj.__class__.__name__ + '.' + obj.id] = obj 
+                    query_dict[obj.__class__.__name__ + '.' + obj.id] = obj
 
         return query_dict
-
 
     def new(self, obj):
         """
@@ -115,9 +121,9 @@ class Storage:
         """
         if cls not in classes.values():
             return None
-        objects = models.storage.all(cls)
+        objects = storage.all(cls)
         for val in objects.values():
-            if (val.id == id):
+            if val.id == id:
                 return val
         return None
 

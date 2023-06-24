@@ -9,11 +9,12 @@ from models.user import User
 from models.blog_post import BlogPost
 from sqlalchemy import ForeignKey, Text
 
+
 class Comment(BaseModel, Base):
     """
     Comments
     """
-    
+
     __tablename__ = 'comments'
     post_id = Column(String(60), ForeignKey('blog_post.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)

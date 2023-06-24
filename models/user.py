@@ -27,6 +27,9 @@ class User(BaseModel, Base):
     followers = relationship('Follower', back_populates='user')
     following = relationship('Following', back_populates='user')
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     def increment_followers_count(self):
         """
         Increments the number of follower of a user by 1

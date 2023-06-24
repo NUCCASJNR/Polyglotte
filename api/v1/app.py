@@ -30,6 +30,6 @@ def error(error):
 
 
 if __name__ == "__main__":
-    host = getenv("BLOG_API_HOST")
-    port = getenv("BLOG_API_PORT")
-    app.run(host=host, port=port, threaded=True, debug=True)
+    # host = getenv("BLOG_API_HOST")
+    # port = getenv("BLOG_API_PORT")
+    app.run(host='0.0.0.0', port=5000, threaded=True, debug=True)

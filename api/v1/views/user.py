@@ -19,6 +19,7 @@ def get_users():
         users_list.append(user.to_dict())
     return jsonify(users_list)
 
+
 @app_views.route("/users/<user_id>", methods=["DELETE"],
                  strict_slashes=False)
 def delete_user_using_userid(user_id):
@@ -32,6 +33,7 @@ def delete_user_using_userid(user_id):
         return jsonify({"Status": "Deleted"})
     abort(404)
 
+
 @app_views.route("/users/<user_id>", methods=["GET"],
                  strict_slashes=False)
 def get_user_using_userid(user_id):
@@ -43,6 +45,7 @@ def get_user_using_userid(user_id):
         return jsonify(user.to_dict())
     abort(404)
 
+
 @app_views.route("/users", methods=["POST"], strict_slashes=False)
 def post_user():
     """
@@ -51,7 +54,7 @@ def post_user():
 
     user_data = request.get_json()
     if not user_data:
-        return jsonify({"Error": "Not a json"}) 
+        return jsonify({"Error": "Not a json"})
     if 'username' not in user_data:
         return jsonify({"Error": "Missing username"})
     if 'first_name' not in user_data:
@@ -67,6 +70,7 @@ def post_user():
         setattr(user, key, value)
     user.save()
     return jsonify(user.to_dict()), 201
+
 
 @app_views.route("/users/<user_id>", methods=["PUT"], strict_slashes=False)
 def update_user(user_id):

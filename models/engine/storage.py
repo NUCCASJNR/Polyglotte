@@ -19,12 +19,13 @@ from models.following import Following
 from models.user import User
 
 classes = {
-        "user": User,
-        "comment": Comment,
-        "blog_post": BlogPost,
-        "follower": Follower,
-        "following": Following
-    }
+    "user": User,
+    "comment": Comment,
+    "blog_post": BlogPost,
+    "follower": Follower,
+    "following": Following
+}
+
 
 class Storage:
     """
@@ -39,19 +40,23 @@ class Storage:
         Init method
         """
         # Get enviroment variables
-        BLOG_MYSQL_USER = getenv("BLOG_MYSQL_USER")
-        BLOG_MYSQL_PWD = getenv("BLOG_MYSQL_PWD")
-        BLOG_MYSQL_HOST = getenv("BLOG_MYSQL_HOST")
-        BLOG_MYSQL_DB = getenv("BLOG_MYSQL_DB")
-        BLOG_ENV = getenv("BLOG_ENV")
+        # BLOG_MYSQL_USER = getenv("BLOG_MYSQL_USER")
+        # BLOG_MYSQL_PWD = getenv("BLOG_MYSQL_PWD")
+        # BLOG_MYSQL_HOST = getenv("BLOG_MYSQL_HOST")
+        # BLOG_MYSQL_DB = getenv("BLOG_MYSQL_DB")
+        # BLOG_ENV = getenv("BLOG_ENV")
 
         # Create SQLAlchemy engine instance
-        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(BLOG_MYSQL_USER,
-                                             BLOG_MYSQL_PWD,
-                                             BLOG_MYSQL_HOST,
-                                             BLOG_MYSQL_DB))
-        # Drop all tables in the database if in test enviroment
+        # self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
+        #                               format(BLOG_MYSQL_USER,
+        #                                      BLOG_MYSQL_PWD,
+        #                                      BLOG_MYSQL_HOST,
+        #                                      BLOG_MYSQL_DB))
+        # # Drop all tables in the database if in test enviroment
+        # if getenv('BLOG_ENV') == 'test':
+        #     Base.metadata.drop_all(bind=self.__engine)
+
+        self.__engine = create_engine('mysql+mysqldb://blog_dev:blog_dev_pwd@localhost:3306/blog_dev_db')
         if getenv('BLOG_ENV') == 'test':
             Base.metadata.drop_all(bind=self.__engine)
 
