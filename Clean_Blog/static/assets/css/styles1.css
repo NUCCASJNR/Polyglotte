@@ -1,0 +1,46 @@
+.btn {
+  margin-right: 5px;
+}
+
+.btn {
+  margin-left: 5px;
+}
+
+#email {
+  width: 350px;
+}
+
+#password {
+  width: 350px;
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.custom-button {
+  margin-right: 5px;
+}
+
+.custom-button {
+  margin-right: 5px;
+}
+
+.btn {
+  margin-left: 5px;
+}
+
+h2.login {
+  font-size: 30px;
+  line-height: 38px;
+  font-family: Inter;
+  color: #2b2d30;
+}
+
+h2.welcome {
+  margin-top: -6px;
+  padding-bottom: 0px;
+  font-size: 14.1px;
+  font-family: inter;
+}
+
