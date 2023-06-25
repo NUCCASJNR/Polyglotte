@@ -138,3 +138,13 @@
   margin-left: 5px;
 }
 
+.fc {
+  width: 300px;
+}
+
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #e79c9c;
+    font-style: italic;
+    font-size: 14px;
+}

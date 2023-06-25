@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-from flask import abort, jsonify, make_response, request
+from flask import abort, jsonify, request
 
-from api.v1.views import app_views
+from Clean_Blog import app_views
 from models import storage
 from models.user import User
 

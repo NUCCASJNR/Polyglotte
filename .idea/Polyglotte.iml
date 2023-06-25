@@ -19,6 +19,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/web_users/templates" />
+        <option value="$MODULE_DIR$/Clean_Blog/templates" />
       </list>
     </option>
   </component>

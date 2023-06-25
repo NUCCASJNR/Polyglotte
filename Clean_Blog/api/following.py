@@ -5,7 +5,7 @@ HAndles all RESTFUL APIs for following
 
 from flask import abort, jsonify, request
 
-from api.v1.views import app_views
+from Clean_Blog import app_views
 from models import storage
 from models.following import Following
 from models.user import User

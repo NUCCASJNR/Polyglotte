@@ -32,38 +32,14 @@
     <form action="" method="POST">
         {{ form.hidden_tag() }}
         <div>
-            {{ form.first_name.label(class="form-label") }}
-            {{ form.first_name(class="form-control fc") }}
-            {{ form.last_name.label(class="form-label") }}
-            {{ form.last_name(class="form-control fc") }}
-            {{ form.email.label(class="form-label") }}
-            {% if form.email.errors %}
-                {{ form.email(class="form-control fc is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.email(class="form-control fc") }}
-            {% endif %}
-            {{ form.username.label(class="form-label") }}
-            {% if form.username.errors %}
-                {{ form.username(class="form-control fc is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.username(class="form-control fc") }}
-            {% endif %}
-            {{ form.password.label(class="form-label") }}
-            {{ form.password(class="form-control fc") }}
-            {{ form.confirm_password.label(class="form-label") }}
-            {{ form.confirm_password(class="form-control fc") }}
+            <label class="form-label" for="first-name">First Name*</label><input class="form-control form-control" type="text" id="first-name" placeholder="Enter first name" required="" style="width:300px;">
+            <label class="form-label" for="last-name">Last Name*</label><input class="form-control form-control" type="text" id="last-name" placeholder="Enter last name" required="" style="width:300px;">
+            <label class="form-label" for="username">Username</label><input class="form-control form-control" type="text" id="username" placeholder="Enter username" required="" style="width:300px;">
+            <label class="form-label" for="email">Email*</label><input class="form-control form-control" type="email" id="email" placeholder="Enter email" required="" style="width:300px;">
+            <label class="form-label" for="password">Password*</label><input class="form-control form-control" type="password" id="password" placeholder="Create a password" required="" style="width:300px;">
+            <label class="form-label" for="text">Must be at least 8 characters</label>
         </div>
-        <div class="form-container">{{ form.submit(class="btn btn-primary custom-button") }}
+        <div class="form-container"><button class="btn btn-primary custom-button" type="button" data-bs-toggle="button">Get Started</button>
             <div><button class="btn btn-light custom-button" type="button">Sign up with Google</button></div>
             <p>Already have an account? <a class="btn btn-link" role="button" data-bs-toggle="button">Login</a></p>
         </div>
