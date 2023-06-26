@@ -6,10 +6,18 @@ Users module for the Blog
 from sqlalchemy import Text
 from sqlalchemy.orm import relationship
 
+import models
 from models.base_model import Base, BaseModel, Column, Integer, String
+from Clean_Blog import login_manager
+from flask_login import UserMixin
 
 
-class User(BaseModel, Base):
+@login_manager.user_loader
+def load_user(user_id):
+    return models.storage.query(User).get(str(user_id))
+
+
+class User(BaseModel, Base, UserMixin):
     """
     The User class contains all the user's info
     """

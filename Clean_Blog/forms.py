@@ -2,11 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from models.user import User
-# from models.engine.storage import Storage
-#
-# storage = Storage()
-# storage.reload()
-from Clean_Blog import storage
+from models import storage
 
 
 class SignupForm(FlaskForm):
@@ -25,12 +21,12 @@ class SignupForm(FlaskForm):
     submit = SubmitField('Get Started')
 
     def validate_username(self, username):
-        user = storage.query(User, 'username', username.data)
+        user = storage.query(User).filter_by(username=username.data).first()
         if user:
             raise ValidationError('This username already exists')
 
     def validate_email(self, email):
-        user = storage.query(User, 'email', email.data)
+        user = storage.query(User).filter_by(email=email.data).first()
         if user:
             raise ValidationError('This email already exists')
 
