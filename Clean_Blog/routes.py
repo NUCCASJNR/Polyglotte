@@ -2,7 +2,7 @@ from models import User
 from flask import redirect, url_for, render_template, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from Clean_Blog import app, bcrypt
-from Clean_Blog.forms import SignupForm, LoginForm
+from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm
 from models import storage
 
 
@@ -49,7 +49,54 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/account')
+@app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    return current_user.username
+    form = UpdateForm()
+    flash('Test update function', 'success')
+    if form.validate_on_submit():
+        flash('Test Validate', 'success')
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        storage.new(current_user)
+        storage.save()
+        flash('Your account has successfully been updated', 'success')
+        # return redirect(url_for('account'))
+    elif request.method == 'GET':
+        flash('Test GET', 'success')
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('profile_page.html', form=form)
+
+
+@app.route('/update', methods=['GET', 'POST'])
+def update():
+    form = UpdateForm()
+    flash('Test update function', 'success')
+    if form.validate_on_submit():
+        flash('Test Validate', 'success')
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.last_name.data
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        flash('{}'.format(request.form))
+        storage.new(current_user)
+        storage.save()
+        flash('Your account has successfully been updated', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        flash('Test GET', 'success')
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('update.html', form=form)
+
+
+@app.route('/update_user', methods=['GET'])
+def update_user():
+    return request.form
