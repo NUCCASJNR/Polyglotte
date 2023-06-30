@@ -1,9 +1,9 @@
 from models import User
 from flask import redirect, url_for, render_template, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from Clean_Blog import app, bcrypt
+from Clean_Blog import app, bcrypt, db
 from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm
-from models import storage
+# from models import storage
 
 
 @app.route('/')
@@ -20,7 +20,8 @@ def signup():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data,
                     username=form.username.data, password=hashed_password)
-        user.save()
+        db.session.add(user)
+        db.session.commit()
         flash('Your account has been created. You can now login', 'success')
         return redirect(url_for('index'))
     return render_template('signup.html', title='Sign Up', form=form)
@@ -32,7 +33,7 @@ def login():
         return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = storage.query(User).filter_by(username=form.username.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
@@ -53,19 +54,15 @@ def logout():
 @login_required
 def account():
     form = UpdateForm()
-    flash('Test update function', 'success')
     if form.validate_on_submit():
-        flash('Test Validate', 'success')
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.username = form.username.data
         current_user.email = form.email.data
-        storage.new(current_user)
-        storage.save()
+        db.session.commit()
         flash('Your account has successfully been updated', 'success')
         # return redirect(url_for('account'))
     elif request.method == 'GET':
-        flash('Test GET', 'success')
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.username.data = current_user.username
@@ -74,22 +71,18 @@ def account():
 
 
 @app.route('/update', methods=['GET', 'POST'])
+@login_required
 def update():
     form = UpdateForm()
-    flash('Test update function', 'success')
     if form.validate_on_submit():
-        flash('Test Validate', 'success')
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.username = form.username.data
         current_user.email = form.email.data
-        flash('{}'.format(request.form))
-        storage.new(current_user)
-        storage.save()
+        db.session.commit()
         flash('Your account has successfully been updated', 'success')
         return redirect(url_for('account'))
     elif request.method == 'GET':
-        flash('Test GET', 'success')
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.username.data = current_user.username

@@ -14,7 +14,7 @@ from flask_login import UserMixin
 
 @login_manager.user_loader
 def load_user(user_id):
-    return models.storage.query(User).get(str(user_id))
+    return User.query.get(str(user_id))
 
 
 class User(BaseModel, db.Model, UserMixin):

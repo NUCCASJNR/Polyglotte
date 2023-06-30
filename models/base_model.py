@@ -59,12 +59,12 @@ class BaseModel(db.Model):
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
-    def save(self):
-        """Updates updated_at with current time when instance is changed"""
-        from models import storage
-        self.updated_at = datetime.now()
-        storage.new(self)
-        storage.save()
+    # def save(self):
+    #     """Updates updated_at with current time when instance is changed"""
+    #     from models import storage
+    #     self.updated_at = datetime.now()
+    #     storage.new(self)
+    #     storage.save()
 
     def to_dict(self):
         """Convert instance into dict format"""
@@ -78,5 +78,5 @@ class BaseModel(db.Model):
             del new_dict["_sa_instance_state"]
         return new_dict
 
-    def delete(self):
-        models.storage.delete(self)
+    # def delete(self):
+    #     models.storage.delete(self)

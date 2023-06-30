@@ -17,7 +17,8 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <form id="update_form" action="/update_user" method="POST" style="padding: 20px;padding-top: 0px;padding-bottom: 0px;">
+    <form id="update_form" action="" method="POST" enctype="multipart/form-data" style="padding: 20px;padding-top: 0px;padding-bottom: 0px;">
+        {{ form.hidden_tag() }}
                                         <div class="row" style="margin-bottom: 20px;text-align: left;margin-right: 0px;margin-left: 0px;">
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="display:inline;text-align:center;margin-bottom:0px;height:300px;"><img class="rounded-circle img-fluid mb-3 mt-4" src="../static/assets/img/dogs/image2.jpeg" style="display:inline;max-height:200px;width:200px;height:200px;"><br><button class="btn btn-primary btn-sm" id="photoBtn" type="button">Change Photo</button></div>
                                             <div class="col-md-6 col-lg-12">

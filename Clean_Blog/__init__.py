@@ -16,10 +16,10 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 
-from models.engine.storage import Storage
+# from models.engine.storage import Storage
 
-storage = Storage()
-storage.reload()
+# storage = Storage()
+# storage.reload()
 
-from Clean_Blog.api import comments, following, followers, posts, states, users
+# from Clean_Blog.api import comments, following, followers, posts, states, users
 from Clean_Blog import routes

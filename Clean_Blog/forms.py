@@ -5,7 +5,7 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from models.user import User
-from models import storage
+# from models import storage
 
 
 class SignupForm(FlaskForm):
@@ -24,12 +24,12 @@ class SignupForm(FlaskForm):
     submit = SubmitField('Get Started')
 
     def validate_username(self, username):
-        user = storage.query(User).filter_by(username=username.data).first()
+        user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('This username already exists')
 
     def validate_email(self, email):
-        user = storage.query(User).filter_by(email=email.data).first()
+        user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('This email already exists')
 
@@ -46,12 +46,12 @@ class UpdateForm(FlaskForm):
     last_name = StringField('Last Name', validators=[DataRequired(), Length(min=3)])
     email = StringField('Email Address', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=25)])
-    picture = FileField(validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    # picture = FileField(validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Update')
 
     def validate_username(self, username):
         if username.data != current_user.username:
-            user = storage.query(User).filter_by(username=username.data).first()
+            user = User.query.filter_by(username=username.data).first()
             if user:
                 flash('{} already exists'.format(username.data), 'danger')
                 raise ValidationError('This username already exists')
@@ -59,7 +59,7 @@ class UpdateForm(FlaskForm):
 
     def validate_email(self, email):
         if email.data != current_user.email:
-            user = storage.query(User).filter_by(email=email.data).first()
+            user = User.query.filter_by(email=email.data).first()
             if user:
                 flash('{} already exists'.format(email.data), 'danger')
                 raise ValidationError('This email already exists')
