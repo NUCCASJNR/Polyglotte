@@ -3,6 +3,7 @@
 from flask import Blueprint, Flask
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://blog_dev:blog_dev_pwd@l
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+migrate = Migrate(app, db)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
 

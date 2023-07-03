@@ -3,13 +3,10 @@
 Users module for the Blog
 """
 
-from sqlalchemy import Text
-from sqlalchemy.orm import relationship
-
-import models
-from models.base_model import Base, BaseModel, Column, Integer, String
-from Clean_Blog import login_manager, db
 from flask_login import UserMixin
+
+from Clean_Blog import login_manager, db
+from models.base_model import BaseModel
 
 
 @login_manager.user_loader
@@ -27,7 +24,7 @@ class User(BaseModel, db.Model, UserMixin):
     email = db.Column(db.String(128), unique=True, nullable=False)
     first_name = db.Column(db.String(128), nullable=False)
     last_name = db.Column(db.String(128), nullable=False)
-    picture = db.Column(db.String(128))
+    picture = db.Column(db.String(20), default='default.jpeg', nullable=False)
     bio = db.Column(db.Text)
     no_followers = db.Column(db.Integer, default=0)
     no_following = db.Column(db.Integer, default=0)

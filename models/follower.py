@@ -8,7 +8,7 @@ from sqlalchemy import ForeignKey
 
 from Clean_Blog import db
 from models.base_model import Base, BaseModel, Column, Integer, String
-from models.user import User, relationship
+from models.user import User
 
 
 class Follower(BaseModel, db.Model):
