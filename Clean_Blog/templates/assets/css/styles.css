@@ -1,0 +1,14 @@
+@media (min-width: 1400px) {
+  section {
+    min-width: 50%;
+    max-width: 70%;
+  }
+}
+
+@media (min-width: 1200px) {
+  section {
+    min-width: 50%;
+    max-width: 80%;
+  }
+}
+

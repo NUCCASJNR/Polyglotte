@@ -2,7 +2,7 @@ from flask import flash
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from models.user import User
 # from models import storage
@@ -63,3 +63,9 @@ class UpdateForm(FlaskForm):
             if user:
                 flash('{} already exists'.format(email.data), 'danger')
                 raise ValidationError('This email already exists')
+
+
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder': 'Title'})
+    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder': 'Content', 'rows': '8'})
+    submit = SubmitField('Post')

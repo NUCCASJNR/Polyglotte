@@ -1,11 +1,11 @@
 import os.path
 import secrets
 from PIL import Image
-from models import User
+from models import User, BlogPost
 from flask import redirect, url_for, render_template, request, flash
 from flask_login import login_user, current_user, logout_user, login_required
 from Clean_Blog import app, bcrypt, db
-from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm
+from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm
 
 
 # from models import storage
@@ -90,3 +90,17 @@ def account():
         form.email.data = current_user.email
     image_file = url_for('static', filename='img/profile_pics/{}'.format(current_user.picture))
     return render_template('profile_page.html', form=form, image_file=image_file)
+
+
+@app.route('/post/new', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = BlogPost(title=form.title.data, content=form.content.data, user=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('index'))
+    return render_template('create_post.html', title='New Post',
+                           form=form, legend='New Post')

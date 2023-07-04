@@ -24,7 +24,7 @@ class BlogPost(BaseModel, db.Model):
     views_count = db.Column(db.Integer)
     picture = db.Column(db.String(256))
     user = db.relationship('User', back_populates='blog_posts')
-    category = db.Column(db.String(60), nullable=False)
+    category = db.Column(db.String(60))
 
     def increment_likes(self):
         """
