@@ -7,23 +7,24 @@ This module handles info about a specific blog post
 from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import relationship
 
+from Clean_Blog import db
 from models.base_model import Base, BaseModel, Column, Integer, String
 from models.user import User
 
 
-class BlogPost(BaseModel, Base):
+class BlogPost(BaseModel, db.Model):
     """
     Blog post Class for all blog posts
     """
     __tablename__ = 'blog_post'
-    user_id = Column(String(60), ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    title = Column(String(255), nullable=False)
-    content = Column(Text, nullable=False)
-    likes_count = Column(Integer)
-    views_count = Column(Integer)
-    picture = Column(String(256))
-    user = relationship('User', back_populates='blog_posts')
-    category = Column(String(60), nullable=False)
+    user_id = db.Column(db.String(60), db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    likes_count = db.Column(db.Integer)
+    views_count = db.Column(db.Integer)
+    picture = db.Column(db.String(256))
+    user = db.relationship('User', back_populates='blog_posts')
+    category = db.Column(db.String(60), nullable=False)
 
     def increment_likes(self):
         """

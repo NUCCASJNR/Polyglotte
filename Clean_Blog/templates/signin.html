@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container">
+        <div class="banner">
+            <h2 class="login">Log into your account</h2>
+            <h2 class="welcome">Welcome back! Please enter your details</h2>
+        </div>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+{#            <label class="form-label" for="email">Email*</label>#}
+{#            <input class="form-control" type="email" id="email" placeholder="Enter email here" required="">#}
+{#            <label class="form-label" for="password">Password*</label>#}
+{#            <input class="form-control" type="password" id="password" placeholder="Create a password" required="">#}
+            {{ form.username.label(class="form-label", id="username") }}
+            {% if form.username.errors %}
+                {{ form.username(class="form-control fc is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.username(class="form-control fc") }}
+            {% endif %}
+            {{ form.password.label(class="form-label", id="password") }}
+            {% if form.password.errors %}
+                {{ form.password(class="form-control fc is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.password(class="form-control fc") }}
+            {% endif %}
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input"><label class="form-label form-check-label" for="email">Remember for 30 days</label>
+                <button class="btn btn-light" data-bs-toggle="button">Forgot Password</button>
+            </div>
+            <div class="form-container">
+                {{ form.submit(class="btn btn-primary custom-button") }}
+                <div><button class="btn btn-light custom-button" type="button">Sign in with Google</button></div>
+                <p>Don't have an account? <a class="btn btn-link" role="button" data-bs-toggle="button">Sign Up</a></p>
+            </div>
+        </form>
+{#        <div>{{ form.submit(class="btn btn-primary custom-button", type="button", data-bs-toggle="button") }}</div>#}
+{#        <div><button class="btn btn-light custom-button" type="button">Continue with Google</button></div>#}
+{#        <p>Don't have an account? <a class="btn btn-outline-secondary" role="button" data-bs-toggle="button">Sign up</a></p>#}
+    </div>
+{% endblock %}

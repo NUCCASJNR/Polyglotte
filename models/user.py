@@ -3,29 +3,37 @@
 Users module for the Blog
 """
 
-from sqlalchemy import Text
-from sqlalchemy.orm import relationship
+from flask_login import UserMixin
 
-from models.base_model import Base, BaseModel, Column, Integer, String
+from Clean_Blog import login_manager, db
+from models.base_model import BaseModel
 
 
-class User(BaseModel, Base):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(str(user_id))
+
+
+class User(BaseModel, db.Model, UserMixin):
     """
     The User class contains all the user's info
     """
     __tablename__ = 'users'
-    username = Column(String(128), unique=True, nullable=False)
-    password = Column(String(128), nullable=False)
-    email = Column(String(128), unique=True, nullable=False)
-    first_name = Column(String(128), nullable=False)
-    last_name = Column(String(128), nullable=False)
-    picture = Column(String(128))
-    bio = Column(Text)
-    no_followers = Column(Integer, default=0)
-    no_following = Column(Integer, default=0)
-    blog_posts = relationship('BlogPost', back_populates='user')
-    followers = relationship('Follower', back_populates='user')
-    following = relationship('Following', back_populates='user')
+    username = db.Column(db.String(128), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    first_name = db.Column(db.String(128), nullable=False)
+    last_name = db.Column(db.String(128), nullable=False)
+    picture = db.Column(db.String(20), default='default.jpeg', nullable=False)
+    bio = db.Column(db.Text)
+    no_followers = db.Column(db.Integer, default=0)
+    no_following = db.Column(db.Integer, default=0)
+    blog_posts = db.relationship('BlogPost', back_populates='user', lazy=True)
+    followers = db.relationship('Follower', back_populates='user')
+    following = db.relationship('Following', back_populates='user')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def increment_followers_count(self):
         """
