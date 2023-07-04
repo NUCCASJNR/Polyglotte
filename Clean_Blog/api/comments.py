@@ -5,7 +5,7 @@ HAndles All APIs for comments
 """
 from flask import abort, jsonify, request
 
-from api.v1.views import app_views
+from Clean_Blog import app_views
 from models import storage
 from models.blog_post import BlogPost
 from models.comment import Comment

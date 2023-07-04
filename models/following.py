@@ -6,14 +6,15 @@ This module handles the no of users a user is following
 
 from sqlalchemy import ForeignKey
 
+from Clean_Blog import db
 from models.base_model import Base, BaseModel, Column, Integer, String
-from models.user import User, relationship
+from models.user import User
 
 
-class Following(BaseModel, Base):
+class Following(BaseModel, db.Model):
     """
     Followers class
     """
     __tablename__ = 'following'
-    follower_user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
-    user = relationship('User', back_populates='following')
+    follower_user_id = db.Column(String(60), db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship('User', back_populates='following')

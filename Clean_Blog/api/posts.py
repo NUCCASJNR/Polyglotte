@@ -1,10 +1,10 @@
- #!/usr/bin/python3
+# !/usr/bin/python3
 """
 API routes for blog posts
 """
-from flask import abort, jsonify, make_response, request
+from flask import abort, jsonify, request
 
-from api.v1.views import app_views
+from Clean_Blog import app_views
 from models import storage
 from models.blog_post import BlogPost
 from models.user import User
@@ -20,6 +20,7 @@ def get_blogposts():
     for post in posts.values():
         posts_list.append(post.to_dict())
     return jsonify(posts_list)
+
 
 @app_views.route("/posts/<post_id>", methods=["GET"], strict_slashes=False)
 def get_blogpost_using_postid(post_id):
@@ -59,7 +60,7 @@ def get_all_posts_of_user(user_id):
 
 
 @app_views.route("/posts/<user_id>/posts", methods=["DELETE"],
-                  strict_slashes=False)
+                 strict_slashes=False)
 def delete_all_posts_of_a_user(user_id):
     user = storage.get(User, user_id)
     post_list = []
@@ -68,7 +69,7 @@ def delete_all_posts_of_a_user(user_id):
             if post.user_id == user_id:
                 user.delete()
                 storage.save()
-        return jsonify({"status": "Post deleted"})     
+        return jsonify({"status": "Post deleted"})
     abort(404)
 
 
@@ -94,8 +95,9 @@ def post_blogpost():
     post.save()
     return jsonify(post.to_dict()), 201
 
+
 @app_views.route("/posts/<post_id>", methods=["PUT"],
-                  strict_slashes=False)
+                 strict_slashes=False)
 def update_posts(post_id):
     """
     Updates a Blog Post
@@ -111,4 +113,4 @@ def update_posts(post_id):
                 setattr(post, key, value)
         post.save()
         return jsonify(post.to_dict()), 200
-    abort(404)   
+    abort(404)
