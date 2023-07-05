@@ -20,11 +20,12 @@ class BlogPost(BaseModel, db.Model):
     user_id = db.Column(db.String(60), db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    subheading = db.Column(db.Text)
     likes_count = db.Column(db.Integer)
     views_count = db.Column(db.Integer)
     picture = db.Column(db.String(256), default='default_post.jpg')
     user = db.relationship('User', back_populates='blog_posts')
-    category = db.Column(db.String(60))
+    category = db.Column(db.String(50), default='Miscellaneous')
 
     def increment_likes(self):
         """

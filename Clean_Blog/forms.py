@@ -67,7 +67,9 @@ class UpdateForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder': 'Title'})
+    title = StringField('Title', validators=[DataRequired()])
+    subheading = StringField('Sub-Heading', validators=[DataRequired()])
+    category = StringField('Category')
     # content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder': 'Content', 'rows': '8'})
     content = CKEditorField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
