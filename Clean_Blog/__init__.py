@@ -5,8 +5,10 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_ckeditor import CKEditor
 
 app = Flask(__name__)
+ckeditor = CKEditor(app)
 app_views = Blueprint('app_views', __name__, url_prefix='/')
 
 app.config['SECRET_KEY'] = '178d94e6aedab98a3349aeb7cb37713a'

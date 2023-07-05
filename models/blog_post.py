@@ -22,7 +22,7 @@ class BlogPost(BaseModel, db.Model):
     content = db.Column(db.Text, nullable=False)
     likes_count = db.Column(db.Integer)
     views_count = db.Column(db.Integer)
-    picture = db.Column(db.String(256))
+    picture = db.Column(db.String(256), default='default_post.jpg')
     user = db.relationship('User', back_populates='blog_posts')
     category = db.Column(db.String(60))
 

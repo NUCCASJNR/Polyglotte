@@ -24,7 +24,7 @@ class User(BaseModel, db.Model, UserMixin):
     email = db.Column(db.String(128), unique=True, nullable=False)
     first_name = db.Column(db.String(128), nullable=False)
     last_name = db.Column(db.String(128), nullable=False)
-    picture = db.Column(db.String(20), default='default.jpeg', nullable=False)
+    picture = db.Column(db.String(128), default='default.jpeg', nullable=False)
     bio = db.Column(db.Text)
     no_followers = db.Column(db.Integer, default=0)
     no_following = db.Column(db.Integer, default=0)

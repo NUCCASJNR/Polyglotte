@@ -43,7 +43,7 @@
     {% endwith %}
     <div class="text-center profile-card" style="margin:0;background-color:#ffffff;">
         <div class="d-flex d-lg-flex profile-card-img" style="height:600px;background:linear-gradient(white 0%, rgba(62,140,228,0.81) 0%), url(&quot;../static/img/pexels-kaique-rocha-242133.jpg&quot;) center / cover repeat-x, #ffffff;">
-            <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src="../static/img/avatar-dhg.png" height="150px">
+            <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src="{{ image_file }}" height="150px">
                 <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">{{ current_user.first_name }} {{ current_user.last_name }}</h3>
                 <p style="padding:18px;padding-bottom:0;padding-top:0px;font-size:24px;color:var(--bs-body-bg);">@{{ current_user.username }}</p>
                 <div class="container d-lg-flex" style="margin-top:0px;">

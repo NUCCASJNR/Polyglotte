@@ -79,7 +79,10 @@
            </div>
 {#                <div><button class="btn btn-primary d-block w-100" type="submit">Post</button></div>#}
             </form>
+            {{ ckeditor.load() }}
+            {{ ckeditor.config(name='content') }}
         </div>
+
     </section>
     <footer class="text-center py-4">
         <div class="container">

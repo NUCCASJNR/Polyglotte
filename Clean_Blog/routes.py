@@ -2,7 +2,7 @@ import os.path
 import secrets
 from PIL import Image
 from models import User, BlogPost
-from flask import redirect, url_for, render_template, request, flash
+from flask import redirect, url_for, render_template, request, flash, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Clean_Blog import app, bcrypt, db
 from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm
@@ -61,7 +61,7 @@ def save_picture(form_picture):
     picture_filename = random_hex + file_extension
     picture_path = os.path.join(app.root_path, 'static/img/profile_pics', picture_filename)
 
-    output_size = (125, 125)
+    output_size = (500, 500)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
@@ -104,3 +104,47 @@ def new_post():
         return redirect(url_for('index'))
     return render_template('create_post.html', title='New Post',
                            form=form, legend='New Post')
+
+
+@app.route('/post/<string:post_id>')
+def show_post(post_id):
+    post = BlogPost.query.get_or_404(post_id)
+    post_picture = url_for('static', filename='img/{}'.format(post.picture))
+    return render_template('post.html', title=post.title, post=post, picture=post_picture)
+
+
+@app.route('/post/<string:post_id>/update', methods=['POST', 'GET'])
+@login_required
+def update_post(post_id):
+    post = BlogPost.query.get_or_404(post_id)
+    if post.user != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash('Your post has been updated!', 'success')
+        return redirect(url_for('show_post', post_id=post_id))
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html', title='Update Post',
+                           form=form, legend='Update Post')
+
+
+@app.route('/post/<string:post_id>/delete', methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = BlogPost.query.get_or_404(post_id)
+    if post.user != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash('Your post has been deleted', 'success')
+    return redirect(url_for('index'))
+
+
+@app.route('/post')
+def post():
+    return render_template('post.html')

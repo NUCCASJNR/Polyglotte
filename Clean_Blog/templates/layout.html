@@ -31,6 +31,7 @@
                     <li class="nav-item"><a class="nav-link" href="#">Our Story</a></li>
                 </ul>
                 {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('new_post') }}"><button class="btn btn-light" type="button" style="margin-right: 5px;">New Post</button></a>
                     <a href="{{ url_for('account') }}"><button class="btn btn-light" type="button" style="margin-right: 5px;">Account</button></a>
                     <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;">Logout</button></a>
                 {% else %}

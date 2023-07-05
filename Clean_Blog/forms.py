@@ -1,4 +1,5 @@
 from flask import flash
+from flask_ckeditor import CKEditorField
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
@@ -67,5 +68,6 @@ class UpdateForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()], render_kw={'placeholder': 'Title'})
-    content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder': 'Content', 'rows': '8'})
+    # content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder': 'Content', 'rows': '8'})
+    content = CKEditorField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
