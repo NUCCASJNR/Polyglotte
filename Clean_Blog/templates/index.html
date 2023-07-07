@@ -11,169 +11,62 @@
         </div>
     </section>
     <section>
-        <div class="container">
-            <div>
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-1">Category1</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" role="tab" data-bs-toggle="tab" href="#tab-2">Category2</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-3">Category3</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane" role="tabpanel" id="tab-1">
-                        <div class="container py-4 py-xl-5">
-                            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category1</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category1</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category1</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
+    <div class="container">
+        <div class="tab-content">
+            <div class="container py-4 py-xl-5">
+                <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                    {% for post in posts %}
+                    <div class="col">
+                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="{{ url_for('static', filename='img/{}'.format(post.picture)) }}" />
+                            <div class="card-body p-4">
+                                <p class="text-primary card-text mb-0">{{ post.category }}</p>
+                                <h4 class="card-title"><a href="{{ url_for('show_post', post_id=post.id) }}" style="text-decoration: None; ">{{ post.title }}</a></h4>
+                                <p class="card-text">{{ post.subheading }}</p>
+                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{ url_for('static', filename='img/profile_pics/{}'.format(post.user.picture)) }}" />
+                                    <div>
+                                        <p class="fw-bold mb-0">{{ post.user.first_name }} {{ post.user.last_name }}</p>
+                                        <p class="text-muted mb-0">{{ post.created_at.strftime('%d %B, %Y') }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" role="tabpanel" id="tab-2">
-                        <div class="container py-4 py-xl-5">
-                            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category2</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category2</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category2</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane active" role="tabpanel" id="tab-3">
-                        <div class="container py-4 py-xl-5">
-                            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category3</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category3</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                        <div class="card-body p-4">
-                                            <p class="text-primary card-text mb-0">Category3</p>
-                                            <h4 class="card-title">Lorem libero donec</h4>
-                                            <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>
-                                            <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png">
-                                                <div>
-                                                    <p class="fw-bold mb-0">John Smith</p>
-                                                    <p class="text-muted mb-0">Erat netus</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+{#                    <div class="col">#}
+{#                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
+{#                            <div class="card-body p-4">#}
+{#                                <p class="text-primary card-text mb-0">Category1</p>#}
+{#                                <h4 class="card-title">Lorem libero donec</h4>#}
+{#                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>#}
+{#                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
+{#                                    <div>#}
+{#                                        <p class="fw-bold mb-0">John Smith</p>#}
+{#                                        <p class="text-muted mb-0">Erat netus</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col">#}
+{#                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
+{#                            <div class="card-body p-4">#}
+{#                                <p class="text-primary card-text mb-0">Category1</p>#}
+{#                                <h4 class="card-title">Lorem libero donec</h4>#}
+{#                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>#}
+{#                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
+{#                                    <div>#}
+{#                                        <p class="fw-bold mb-0">John Smith</p>#}
+{#                                        <p class="text-muted mb-0">Erat netus</p>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 {% endblock content %}

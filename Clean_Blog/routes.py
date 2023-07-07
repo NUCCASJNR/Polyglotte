@@ -13,7 +13,8 @@ from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
+    return render_template('index.html', posts=posts)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -97,7 +98,10 @@ def account():
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
-        post = BlogPost(title=form.title.data, content=form.content.data, user=current_user)
+        if form.category.data == '':
+            form.category.data = 'Miscellaneous'
+        post = BlogPost(title=form.title.data, content=form.content.data, subheading=form.subheading.data,
+                        category=form.category.data, user=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
@@ -110,7 +114,7 @@ def new_post():
 def show_post(post_id):
     post = BlogPost.query.get_or_404(post_id)
     post_picture = url_for('static', filename='img/{}'.format(post.picture))
-    return render_template('post.html', title=post.title, post=post, picture=post_picture)
+    return render_template('post_page.html', title=post.title, post=post, picture=post_picture)
 
 
 @app.route('/post/<string:post_id>/update', methods=['POST', 'GET'])
@@ -122,12 +126,16 @@ def update_post(post_id):
     form = PostForm()
     if form.validate_on_submit():
         post.title = form.title.data
+        post.subheading = form.subheading.data
+        post.category = form.category.data
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('show_post', post_id=post_id))
     elif request.method == 'GET':
         form.title.data = post.title
+        form.subheading.data = post.subheading
+        form.category.data = post.category
         form.content.data = post.content
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post')
@@ -147,4 +155,4 @@ def delete_post(post_id):
 
 @app.route('/post')
 def post():
-    return render_template('post.html')
+    return render_template('post_page.html')
