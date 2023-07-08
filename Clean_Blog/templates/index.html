@@ -1,72 +1,35 @@
 {% extends "layout.html" %}
 {% block content %}
-    <section class="py-4 py-xl-5">
-        <div class="container">
-            <div class="border rounded border-0 d-flex d-md-flex flex-column justify-content-center align-items-center justify-content-md-center align-items-md-center p-4 py-5" style="background: linear-gradient(rgba(0,123,255,0.2), rgba(0,123,255,0.2)), url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center / cover;height: 500px;">
-                <div class="text-center">
-                    <h1 class="text-uppercase fw-bold mb-3">Polyglotte</h1>
-                    <p class="d-md-flex mb-4" style="transform: scale(1);">Breaking the Blogging Barriers</p><button class="btn btn-primary fs-5 me-2 py-2 px-4" type="button">Login</button><button class="btn btn-light fs-5 py-2 px-4" type="button">Sign Up</button>
-                </div>
+    <section class="d-xl-flex align-items-xl-center" style="height: 500px;background: linear-gradient(rgba(0,0,0,0), rgba(2,36,85,0.7)), url(&quot;../static/img/hero.jpg&quot;) top / cover;margin-top: 75px;">
+        <div class="container" style="color: rgb(255,255,255);font-family: Lato, sans-serif;">
+            <div>
+                <h1 style="font-family: 'DM Serif Display', serif;font-size: 60px;">Break the Blogging Barriers.</h1>
+                <h4 style="font-family: Inter, sans-serif;">Unleash the Power of Multilingual Expression.</h4>
             </div>
         </div>
     </section>
     <section>
-    <div class="container">
-        <div class="tab-content">
-            <div class="container py-4 py-xl-5">
-                <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
-                    {% for post in posts %}
-                    <div class="col">
-                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="{{ url_for('static', filename='img/{}'.format(post.picture)) }}" />
-                            <div class="card-body p-4">
-                                <p class="text-primary card-text mb-0">{{ post.category }}</p>
-                                <h4 class="card-title"><a href="{{ url_for('show_post', post_id=post.id) }}" style="text-decoration: None; ">{{ post.title }}</a></h4>
-                                <p class="card-text">{{ post.subheading }}</p>
-                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{ url_for('static', filename='img/profile_pics/{}'.format(post.user.picture)) }}" />
-                                    <div>
-                                        <p class="fw-bold mb-0">{{ post.user.first_name }} {{ post.user.last_name }}</p>
-                                        <p class="text-muted mb-0">{{ post.created_at.strftime('%d %B, %Y') }}</p>
+        <div class="container">
+            <div class="tab-content">
+                <div class="container py-4 py-xl-5">
+                    <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                        {% for post in posts %}
+                        <div class="col">
+                            <div class="card" style="border-radius: 0px;border-width: 0px;border-top-left-radius: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-top-left-radius: 5px;border-top-right-radius: 5px;" src="../static/img/peakpx.jpg">
+                                <div class="card-body d-xl-flex align-items-xl-center p-4" style="min-height: 195.188px;max-height: 195.188px;background: #022455;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
+                                    <div style="font-family: Inter, sans-serif;">
+                                        <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">
+                                            {{ post.category }}</p>
+                                        <h4 class="card-title" style="color: rgb(255,255,255);font-family: Inter, sans-serif;margin-top: 10px;"><a href="{{ url_for('show_post', post_id=post.id) }}" style="text-decoration: None; color: white;">{{ post.title }}</a></h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-{#                    <div class="col">#}
-{#                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
-{#                            <div class="card-body p-4">#}
-{#                                <p class="text-primary card-text mb-0">Category1</p>#}
-{#                                <h4 class="card-title">Lorem libero donec</h4>#}
-{#                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>#}
-{#                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
-{#                                    <div>#}
-{#                                        <p class="fw-bold mb-0">John Smith</p>#}
-{#                                        <p class="text-muted mb-0">Erat netus</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div class="col">#}
-{#                        <div class="card"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
-{#                            <div class="card-body p-4">#}
-{#                                <p class="text-primary card-text mb-0">Category1</p>#}
-{#                                <h4 class="card-title">Lorem libero donec</h4>#}
-{#                                <p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.</p>#}
-{#                                <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" />#}
-{#                                    <div>#}
-{#                                        <p class="fw-bold mb-0">John Smith</p>#}
-{#                                        <p class="text-muted mb-0">Erat netus</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
 {% endblock content %}
