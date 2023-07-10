@@ -1,4 +1,3 @@
-Flask==2.3.2
 Flask-Bcrypt==1.0.1
 Flask-CKEditor==0.4.6
 Flask-Cors==3.0.10
