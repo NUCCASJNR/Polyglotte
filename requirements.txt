@@ -11,3 +11,4 @@ flask-swagger-ui==4.11.1
 Flask-WTF==1.1.1
 SQLAlchemy==2.0.15
 WTForms==3.0.1
+gunicorn==20.1.0
