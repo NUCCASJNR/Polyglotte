@@ -31,7 +31,8 @@ class User(BaseModel, db.Model, UserMixin):
     blog_posts = db.relationship('BlogPost', back_populates='user', lazy=True)
     followers = db.relationship('Follower', back_populates='user')
     following = db.relationship('Following', back_populates='user')
-
+    verified = db.Column(db.Boolean, nullable=False, default=False)
+    verification_code = db.Column(db.String(6), nullable=False)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
