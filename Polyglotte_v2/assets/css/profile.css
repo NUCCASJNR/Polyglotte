@@ -1,0 +1,17 @@
+h3 {
+  font-family: Inter, sans-serif;
+  font-weight: bold;
+}
+
+.bio {
+  font-family: Inter, sans-serif;
+  margin-right: 0px;
+  font-size: 20px;
+}
+
+@media (max-width: 414px) {
+  .bio {
+    font-size: 16px;
+  }
+}
+

@@ -1,0 +1,48 @@
+p {
+  margin-right: 10px;
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
+@media (max-width: 575px) {
+  p {
+    display: block;
+    margin-bottom: 2px;
+  }
+}
+
+h1.fw-semibold {
+  font-size: 60px;
+  font-family: Inter, sans-serif;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  h1.fw-semibold {
+    font-size: 50px;
+  }
+}
+
+.subheading {
+  font-size: 24px;
+  font-family: Inter, sans-serif;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 500px) {
+  .subheading {
+    font-size: 20px;
+  }
+}
+
+.post-info {
+  font-family: Inter, sans-serif;
+  display: inline-block;
+}
+
+@media (max-width: 500px) {
+  .post-info {
+    font-size: 14px;
+  }
+}
+
