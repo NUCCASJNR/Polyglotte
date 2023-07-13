@@ -90,7 +90,8 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='img/profile_pics/{}'.format(current_user.picture))
-    return render_template('profile_page.html', form=form, image_file=image_file)
+    posts = BlogPost.query.order_by(BlogPost.created_at.desc()).filter_by(user=current_user).all()
+    return render_template('profile_page.html', form=form, image_file=image_file, posts=posts)
 
 
 @app.route('/post/new', methods=['GET', 'POST'])

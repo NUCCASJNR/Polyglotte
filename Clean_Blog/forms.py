@@ -11,13 +11,13 @@ from models.user import User
 
 class SignupForm(FlaskForm):
     first_name = StringField('First Name', validators=[DataRequired(), Length(min=3)],
-                             render_kw={'placeholder': 'Enter your First Name'})
+                             render_kw={'placeholder': 'John'})
     last_name = StringField('Last Name', validators=[DataRequired(), Length(min=3)],
-                            render_kw={'placeholder': 'Enter your Last Name'})
+                            render_kw={'placeholder': 'Doe'})
     email = StringField('Email', validators=[DataRequired(), Email()],
-                        render_kw={'placeholder': 'Enter a valid email address'})
+                        render_kw={'placeholder': 'johndoe123@email.com'})
     username = StringField('Username', validators=[DataRequired(), Length(min=3, max=25)],
-                           render_kw={'placeholder': 'Choose a Username'})
+                           render_kw={'placeholder': 'jondoe123'})
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8)],
                              render_kw={'placeholder': 'Must be at least 8 characters'})
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')],
@@ -36,8 +36,10 @@ class SignupForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=25)])
-    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)])
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=25)],
+                           render_kw={'placeholder': 'Enter your username'})
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8)],
+                             render_kw={'placeholder': 'Enter your password'})
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
