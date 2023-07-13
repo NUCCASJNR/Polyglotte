@@ -34,11 +34,17 @@
                     </svg></span><span style="font-family: ABeeZee, sans-serif;color: rgb(255,255,255);">Polyglotte</span></a><i class="icon ion-navicon-round navbar-toggler" id="nav-toggle" data-bs-toggle="collapse" data-bs-target="#navcol-3" style="font-size:30px;color:rgb(255,255,255);"></i>
             <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav d-flex align-items-center mx-auto" style="color:rgb(255,255,255);transform:translate(0px);">
-                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">Our Story</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">New Post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">New Post</a></li>
                 </ul>
-                <div class="d-flex justify-content-center"><button class="btn btn-primary" type="button" style="margin-right:5px;font-family:ABeeZee, sans-serif;">Login</button><button class="btn btn-primary" type="button" style="margin-left:5px;font-family:ABeeZee, sans-serif;">Sign Up</button></div>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('account') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Account</button></a>
+                    <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Logout</button></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Login</button></a>
+                    <a href="{{ url_for('signup') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Sign Up</button></a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -55,36 +61,19 @@
             <div class="tab-content">
                 <div class="container py-4 py-xl-5">
                     <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+                        {% for post in posts %}
                         <div class="col">
                             <div class="card" style="border-radius: 0px;border-width: 0px;border-top-left-radius: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-top-left-radius: 5px;border-top-right-radius: 5px;" src="assets/img/peakpx.jpg">
                                 <div class="card-body d-xl-flex align-items-xl-center p-4" style="min-height: 195.188px;max-height: 195.188px;background: #022455;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
                                     <div style="font-family: Inter, sans-serif;">
-                                        <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">Category1</p>
-                                        <h4 class="card-title" style="color: rgb(255,255,255);font-family: Inter, sans-serif;margin-top: 10px;">How to Get&nbsp; Away with Murder without the Cops, your Mom, or your Girlfriend finding out</h4>
+                                        <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">
+                                            {{ post.category }}</p>
+                                        <h4 class="card-title" style="color: rgb(255,255,255);font-family: Inter, sans-serif;margin-top: 10px;"><a href="{{ url_for('show_post', post_id=post.id) }}" style="text-decoration: None; color: white;">{{ post.title }}</a><</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col" style="border-radius: 0px;">
-                            <div class="card" style="border-radius: 0px;border-width: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-radius: 10px 10px 0px 0px;" src="assets/img/hero.jpg">
-                                <div class="card-body d-xl-flex align-items-xl-center p-4" style="min-height: 195.188px;max-height: 195.188px;background: #022455;border-radius: 0px 0px 10px 10px;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;border-width: 0px;">
-                                    <div style="font-family: Inter, sans-serif;">
-                                        <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">Category1</p>
-                                        <h4 class="card-title" style="color: rgb(255,255,255);margin-top: 10px;">How to be an SF god</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card" style="border-radius: 0px;border-width: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-top-left-radius: 5px;border-top-right-radius: 5px;" src="assets/img/pexels-kaique-rocha-242133.jpg">
-                                <div class="card-body d-xl-flex align-items-xl-center p-4" style="min-height: 195.188px;max-height: 195.188px;background: #022455;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
-                                    <div style="font-family: Inter, sans-serif;">
-                                        <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">Category1</p>
-                                        <h4 class="card-title" style="color: rgb(255,255,255);margin-top: 10px;">Redefining the Game: The Explosive Rise of eSports</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
