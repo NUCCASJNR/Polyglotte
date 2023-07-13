@@ -23,36 +23,29 @@
     <link rel="stylesheet" href="assets/css/post.css">
     <link rel="stylesheet" href="assets/css/profile.css">
     <link rel="stylesheet" href="assets/css/signin.css">
-    <link rel="stylesheet" href="assets/css/signup.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-light">
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-light" style="background: rgb(2, 36, 85);">
         <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier">
                         <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
                         <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
                     </svg></span><span style="font-family: ABeeZee, sans-serif;color: rgb(255,255,255);">Polyglotte</span></a><i class="icon ion-navicon-round navbar-toggler" id="nav-toggle" data-bs-toggle="collapse" data-bs-target="#navcol-3" style="font-size:30px;color:rgb(255,255,255);"></i>
             <div class="collapse navbar-collapse" id="navcol-3">
                 <ul class="navbar-nav d-flex align-items-center mx-auto" style="color:rgb(255,255,255);transform:translate(0px);">
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Our Story</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">New Post</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color:rgb(255,255,255);font-size:16px;font-family:ABeeZee, sans-serif;">New Post</a></li>
                 </ul>
-                {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('account') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Account</button></a>
-                    <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Logout</button></a>
-                {% else %}
-                    <a href="{{ url_for('login') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Login</button></a>
-                    <a href="{{ url_for('signup') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Sign Up</button></a>
-                {% endif %}
+                <div class="d-flex justify-content-center"><button class="btn btn-primary" type="button" style="margin-right:5px;font-family:ABeeZee, sans-serif;">Login</button><button class="btn btn-primary" type="button" style="margin-left:5px;font-family:ABeeZee, sans-serif;">Sign Up</button></div>
             </div>
         </div>
     </nav>
     <section class="text-center profile-card" style="background-color: #ffffff;padding-top: 0px;">
         <div class="d-flex d-lg-flex profile-card-img" style="height: 600px;background: linear-gradient(white 0%, rgba(2,36,85,0.79) 0%), url(&quot;assets/img/pexels-kaique-rocha-242133.jpg&quot;) center / cover repeat-x, #ffffff;">
             <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src="assets/img/avatar-dhg.png" height="150px">
-                <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">{{ current_user.first_name }}</h3>
-                <p style="padding: 18px;padding-bottom: 0;padding-top: 0px;font-size: 32px;color: var(--bs-body-bg);font-family: Inter, sans-serif;">@{{ current_user.last_name }}</p>
+                <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">Joseph Mancuso</h3>
+                <p style="padding: 18px;padding-bottom: 0;padding-top: 0px;font-size: 32px;color: var(--bs-body-bg);font-family: Inter, sans-serif;">@JoshMan</p>
                 <div class="d-md-flex justify-content-md-center align-items-md-center" style="margin-top:10px;"><button class="btn btn-primary d-md-flex" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Edit Profile</button>
                     <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -61,30 +54,25 @@
                                     <h4 class="modal-title">Edit Personal Info</h4><button class="btn-close btn-close-white" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
                                 </div>
                                 <div class="modal-body" style="padding: 0px 0px;">
-{#                                    <form style="padding: 20px;padding-top: 0px;padding-bottom: 0px;">#}
-{#                                        <div class="row" style="margin-bottom: 20px;text-align: left;margin-right: 0px;margin-left: 0px;">#}
-{#                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="display:inline;text-align:center;margin-bottom:0px;height:300px;"><img class="rounded-circle img-fluid mb-3 mt-4" src="assets/img/dogs/image2.jpeg" style="display:inline;max-height:200px;width:200px;height:200px;"><br><button class="btn btn-primary btn-sm" id="photoBtn" type="button">Change Photo</button></div>#}
-{#                                            <div class="col-md-6 col-lg-12">#}
-{#                                                <div class="mb-3"><label class="form-label form-label" for="last_name"><strong>First Name</strong></label><input class="form-control form-control" type="text" placeholder="John" name="first_name" required=""></div>#}
-{#                                            </div>#}
-{#                                            <div class="col-md-6 col-lg-12">#}
-{#                                                <div class="mb-3"><label class="form-label form-label" for="first_name"><strong>LastName</strong></label><input class="form-control form-control" type="text" placeholder="Doe" name="last_name" required=""></div>#}
-{#                                            </div>#}
-{#                                            <div class="col-md-12 text-start">#}
-{#                                                <div class="mb-3"><label class="form-label form-label" for="email"><strong>Email Address</strong></label><input class="form-control form-control" type="email" id="email" placeholder="user@example.com" name="email" required=""></div>#}
-{#                                            </div>#}
-{#                                            <div class="col-md-12 text-start">#}
-{#                                                <div class="mb-3"><label class="form-label form-label" for="username"><strong>Username</strong></label><input class="form-control form-control" type="text" placeholder="Username" name="username" required=""></div>#}
-{#                                            </div>#}
-{#                                            <div class="col">#}
-{#                                                <p class="text-danger" id="emailErrorMsg" style="display:none;"></p>#}
-{#                                                <p class="text-danger" id="passwordErrorMsg" style="display:none;"></p>#}
-{#                                            </div>#}
-{#                                        </div>#}
-{#                                    </form>#}
-
+                                    <form>
+                                        <div class="row" style="margin-bottom: 20px;text-align: left;margin-right: 0px;margin-left: 0px;padding-right: 20px;padding-left: 20px;">
+                                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="display:inline;text-align:center;margin-bottom:0px;height:300px;"><img class="rounded-circle img-fluid mb-3 mt-4" src="assets/img/dogs/image2.jpeg" style="display:inline;max-height:200px;width:200px;height:200px;"><br><button class="btn btn-primary btn-sm" id="photoBtn" type="button">Change Photo</button></div>
+                                            <div class="col-md-6 col-lg-12">
+                                                <div class="mb-3"><label class="form-label form-label" for="last_name"><strong>First Name</strong></label><input class="form-control form-control" type="text" placeholder="John" name="first_name" required=""></div>
+                                            </div>
+                                            <div class="col-md-6 col-lg-12">
+                                                <div class="mb-3"><label class="form-label form-label" for="first_name"><strong>LastName</strong></label><input class="form-control form-control" type="text" placeholder="Doe" name="last_name" required=""></div>
+                                            </div>
+                                            <div class="col-md-12 text-start">
+                                                <div class="mb-3"><label class="form-label form-label" for="email"><strong>Email Address</strong></label><input class="form-control form-control" type="email" id="email" placeholder="user@example.com" name="email" required=""></div>
+                                            </div>
+                                            <div class="col-md-12 text-start">
+                                                <div class="mb-3"><label class="form-label form-label" for="username"><strong>Username</strong></label><input class="form-control form-control" type="text" placeholder="Username" name="username" required=""></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="background: rgb(2,36,85);"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="button">Update</button></div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer" style="background: rgb(2,36,85);"><button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary" type="button">Update</button></div>
                             </div>
                         </div>
                     </div>
