@@ -1,0 +1,207 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.text-and-supporting-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  position: relative;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
+.text {
+  color: var(--gray-900, #101828);
+  text-align: left;
+  font: var(--displaysm-semibold, 600 30px/38px "Inter", sans-serif);
+  position: relative;
+  align-self: stretch;
+}
+
+.supporting-text {
+  color: var(--gray-600, #475467);
+  text-align: left;
+  font: var(--textmd-regular, 400 16px/24px "Inter", sans-serif);
+  position: relative;
+  align-self: stretch;
+}
+
+.content2 {
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+form {
+  /*display: flex;*/
+  flex-direction: column;
+  /*gap: 20px;*/
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  /*position: relative;*/
+}
+
+.input-with-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+label {
+  color: #022455;
+  text-align: left;
+  font: var(--textsm-medium, 500 14px/20px "Inter", sans-serif);
+  position: relative;
+}
+
+.content3 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1;
+  position: relative;
+}
+
+.text2 {
+  color: var(--gray-500, #667085);
+  text-align: left;
+  font: var(--textmd-regular, 400 16px/24px "Inter", sans-serif);
+  position: relative;
+  flex: 1;
+}
+
+.hint-text {
+  color: var(--gray-600, #475467);
+  text-align: left;
+  font: var(--textsm-regular, 400 14px/20px "Inter", sans-serif);
+  position: relative;
+  align-self: stretch;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.button {
+  background: var(--primary-600, #7f56d9);
+  border-radius: 8px;
+  border-style: solid;
+  border-color: var(--primary-600, #7f56d9);
+  border-width: 1px;
+  padding: 10px 18px 10px 18px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: var( --shadow-xs-box-shadow, 0px 1px 2px 0px rgba(16, 24, 40, 0.05) );
+  overflow: hidden;
+}
+
+.text3 {
+  color: var(--base-white, #ffffff);
+  text-align: left;
+  font: var(--textmd-semibold, 600 16px/24px "Inter", sans-serif);
+  position: relative;
+}
+
+.social-button-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.social-button {
+  background: var(--base-white, #ffffff);
+  border-radius: 8px;
+  border-style: solid;
+  border-color: var(--gray-300, #d0d5dd);
+  border-width: 1px;
+  padding: 10px 16px 10px 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: var( --shadow-xs-box-shadow, 0px 1px 2px 0px rgba(16, 24, 40, 0.05) );
+  overflow: hidden;
+}
+
+.social-icon {
+  flex-shrink: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.text4 {
+  color: var(--gray-700, #344054);
+  text-align: left;
+  font: var(--textmd-semibold, 600 16px/24px "Inter", sans-serif);
+  position: relative;
+}
+
+.text5 {
+  color: var(--gray-600, #475467);
+  text-align: left;
+  font: var(--textsm-regular, 400 14px/20px "Inter", sans-serif);
+  position: relative;
+}
+
+.button2 {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.text6 {
+  color: var(--primary-700, #6941c6);
+  text-align: left;
+  font: var(--textsm-semibold, 600 14px/20px "Inter", sans-serif);
+  position: relative;
+}
+

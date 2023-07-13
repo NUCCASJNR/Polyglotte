@@ -1,48 +1,134 @@
-{% extends "layout.html" %}
-{% block content %}
-    <div class="container .specific-container">
-    <div class="banner">
-        <h2>Sign up</h2>
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Form</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bree+Serif&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Text&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+HK&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+    <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="../static/css/Articles-Cards-images.css">
+    <link rel="stylesheet" href="../static/css/Navbar-Centered-Brand-Dark-icons.css">
+    <link rel="stylesheet" href="../static/css/styles.css">
+{#    <link rel="stylesheet" href="../static/css/post.css">#}
+    <link rel="stylesheet" href="../static/css/signin.css">
+    <link rel="stylesheet" href="../static/css/signup.css">
+    <link rel="stylesheet" href="../static/css/Container.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-light">
+        <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier">
+                        <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
+                        <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+                    </svg></span><span style="font-family: ABeeZee, sans-serif;color: rgb(255,255,255);">Polyglotte</span></a><i class="icon ion-navicon-round navbar-toggler" id="nav-toggle" data-bs-toggle="collapse" data-bs-target="#navcol-3" style="font-size:30px;color:rgb(255,255,255);"></i>
+            <div class="collapse navbar-collapse" id="navcol-3">
+                <ul class="navbar-nav d-flex align-items-center mx-auto" style="color:rgb(255,255,255);transform:translate(0px);">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">New Post</a></li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('account') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Account</button></a>
+                    <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Logout</button></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Login</button></a>
+                    <a href="{{ url_for('signup') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Sign Up</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container form-container">
+        <div class="content" style="margin: 50px 0px;">
+            <div class="text-and-supporting-text">
+                <h1 class="text">Sign Up</h1>
+                <h1 class="supporting-text">Welcome to Polyglotte</h1>
+            </div>
+            <div class="content2">
+                <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                    <div class="input-with-label">
+                        <label class="form-label">First Name*</label>
+                        {{ form.first_name(class="form-control fc") }}
+                    </div>
+                    <div class="input-with-label">
+                        <label class="form-label">Last Name*</label>
+                        {{ form.last_name(class="form-control fc") }}
+                    </div>
+                    <div class="input-with-label">
+                        <label class="form-label">Email*</label>
+                         {% if form.email.errors %}
+                            {{ form.email(class="form-control fc is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.email(class="form-control fc") }}
+                        {% endif %}
+                    </div>
+                    <div class="input-with-label">
+                        <label class="form-label">Username*</label>
+                        {% if form.username.errors %}
+                        {{ form.username(class="form-control fc is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control fc") }}
+                    {% endif %}
+                    </div>
+                    <div class="input-with-label">
+                        <label class="form-label">Password*</label>
+                        {{ form.password(class="form-control fc") }}
+                    </div>
+                    <div class="input-with-label">
+                        <label class="form-label">Confirm Password*</label>
+                        {{ form.confirm_password(class="form-control fc") }}
+                    </div>
+                    <div class="actions">
+                         {{ form.submit(class="btn btn-primary submit") }}
+                        <button class="btn btn-primary submit" type="button" style="background: #ffffff;color: rgb(52,64,84);"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-google" style="margin-right: 5px;font-size: 20px;">
+                                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"></path>
+                            </svg>Sign up with Google</button>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center" style="margin-top: 10px;">
+                <p>Already have an account?</p><a href="#">Login</a>
+            </div>
+        </div>
     </div>
-    <form action="" method="POST">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.first_name.label(class="form-label") }}
-            {{ form.first_name(class="form-control fc") }}
-            {{ form.last_name.label(class="form-label") }}
-            {{ form.last_name(class="form-control fc") }}
-            {{ form.email.label(class="form-label") }}
-            {% if form.email.errors %}
-                {{ form.email(class="form-control fc is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.email.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
+    <footer class="text-center py-4">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-lg-3">
+                <div class="col">
+                    <p class="my-2" style="color: var(--bs-body-bg);font-family: Inter, sans-serif;">Copyright&nbsp;© 2023 Polyglotte</p>
                 </div>
-            {% else %}
-                {{ form.email(class="form-control fc") }}
-            {% endif %}
-            {{ form.username.label(class="form-label") }}
-            {% if form.username.errors %}
-                {{ form.username(class="form-control fc is-invalid") }}
-                <div class="invalid-feedback">
-                    {% for error in form.username.errors %}
-                        <span>{{ error }}</span>
-                    {% endfor %}
+                <div class="col"></div>
+                <div class="col">
+                    <ul class="list-inline my-2" style="font-family: Inter, sans-serif;">
+                        <li class="list-inline-item list-inline-item"><a href="#" style="color:var(--bs-secondary-bg);">Privacy Policy</a></li>
+                        <li class="list-inline-item list-inline-item"><a href="#" style="color:var(--bs-secondary-bg);">Terms of Use</a></li>
+                    </ul>
                 </div>
-            {% else %}
-                {{ form.username(class="form-control fc") }}
-            {% endif %}
-            {{ form.password.label(class="form-label") }}
-            {{ form.password(class="form-control fc") }}
-            {{ form.confirm_password.label(class="form-label") }}
-            {{ form.confirm_password(class="form-control fc") }}
+            </div>
         </div>
-        <div class="form-container">
-            {{ form.submit(class="btn btn-primary custom-button") }}
-            <div><button class="btn btn-light custom-button" type="button">Sign up with Google</button></div>
-            <p>Already have an account? <a class="btn btn-link" role="button" data-bs-toggle="button">Login</a></p>
-        </div>
-    </form>
-</div>
-{% endblock %}
+    </footer>
+    <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
