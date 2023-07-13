@@ -1,23 +1,21 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  width: 360px;
   position: relative;
 }
 
 .text-and-supporting-text {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
-  flex-shrink: 0;
   position: relative;
+  margin: 0px;
+  margin-bottom: 20px;
 }
 
 .text {
@@ -62,7 +60,6 @@ form {
 .input-with-label {
   display: flex;
   flex-direction: column;
-  /*gap: 6px;*/
   align-items: flex-start;
   justify-content: flex-start;
   align-self: stretch;
@@ -71,7 +68,7 @@ form {
 }
 
 label {
-  color: var(--gray-700, #344054);
+  color: #022455;
   text-align: left;
   font: var(--textsm-medium, 500 14px/20px "Inter", sans-serif);
   position: relative;

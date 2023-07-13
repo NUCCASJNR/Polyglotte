@@ -40,3 +40,13 @@ section {
   font-size: 18px;
 }
 
+p {
+  margin-right: 5px;
+}
+
+@media (min-width:768px) {
+  .form-container, .container-md, .container-sm {
+    max-width: 500px;
+  }
+}
+
