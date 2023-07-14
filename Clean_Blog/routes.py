@@ -81,7 +81,7 @@ def verify(verification_code):
     user = User.query.filter_by(verification_code=verification_code).first()
     if user:
         user.verified = True
-        user.verification_code = None  # Clear the verification code after successful verification
+        user.verification_code = None  
         db.session.commit()
         login_user(user)
         flash('Your account has been verified and you have been logged in!', 'success')
