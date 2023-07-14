@@ -44,7 +44,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class VerifyForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()], render_kw={'placeholder': 'Enter your email address'})
     verification_code = StringField('Verification Code', validators=[DataRequired()], render_kw={'placeholder': 'Enter the verification code'})
     submit = SubmitField('Verify')
 

@@ -32,7 +32,8 @@ class User(BaseModel, db.Model, UserMixin):
     followers = db.relationship('Follower', back_populates='user')
     following = db.relationship('Following', back_populates='user')
     verified = db.Column(db.Boolean, nullable=False, default=False)
-    verification_code = db.Column(db.String(6), nullable=False)
+    verification_code = db.Column(db.String(60))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -47,15 +48,3 @@ class User(BaseModel, db.Model, UserMixin):
         Increments the number of users a user is following by 1
         """
         self.no_following += 1
-
-    def decrement_followers_count(self):
-        """
-        Decrement the number of follower of a user 1
-        """
-        self.no_followers -= 1
-
-    def decrement_following_count(self):
-        """
-        Decrements the number of users a user is following by 1
-        """
-        self.no_following -= 1
