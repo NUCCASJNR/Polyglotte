@@ -6,7 +6,7 @@ Users module for the Blog
 from flask_login import UserMixin
 
 from Clean_Blog import login_manager, db
-from models.base_model import BaseModel
+from models.base_model import BaseModel, DateTime
 
 
 @login_manager.user_loader
@@ -33,6 +33,7 @@ class User(BaseModel, db.Model, UserMixin):
     following = db.relationship('Following', back_populates='user')
     verified = db.Column(db.Boolean, nullable=False, default=False)
     verification_code = db.Column(db.String(60))
+    verification_expires_at = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

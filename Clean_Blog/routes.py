@@ -1,14 +1,19 @@
 import os.path
 import secrets
-import requests
-from PIL import Image
-from models import User, BlogPost
-from flask import redirect, url_for, render_template, request, flash, abort
-from flask_login import login_user, current_user, logout_user, login_required
-from Clean_Blog import app, bcrypt, db
-from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm, VerifyForm
+from datetime import datetime, timedelta
 from os import getenv
-from flask import current_app
+
+import requests
+from flask import (abort, current_app, flash, redirect, render_template,
+                   request, url_for)
+from flask_login import current_user, login_required, login_user, logout_user
+from PIL import Image
+
+from Clean_Blog import app, bcrypt, db
+from Clean_Blog.forms import (LoginForm, PostForm, SignupForm, UpdateForm,
+                              VerifyForm)
+from models import BlogPost, User
+
 
 @app.route('/')
 def index():
@@ -19,6 +24,7 @@ def index():
 def send_verification_email(user):
     verification_code = secrets.token_hex(16)  # Generate a verification code
     user.verification_code = verification_code
+    user.verification_expires_at = datetime.utcnow() + timedelta(minutes=1) 
     db.session.commit()
 
     verification_url = url_for('verify', verification_code=verification_code, _external=True, _scheme='https')
@@ -80,6 +86,9 @@ def verify(verification_code):
 
     user = User.query.filter_by(verification_code=verification_code).first()
     if user:
+        if user.verification_expires_at and datetime.utcnow() > user.verification_expires_at:
+            flash('The verification link has expired.', 'danger')
+            return redirect(url_for('index'))
         user.verified = True
         user.verification_code = None  
         db.session.commit()
