@@ -20,7 +20,6 @@ def index():
     posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
     return render_template('index.html', posts=posts)
 
-
 def send_verification_email(user):
     verification_code = secrets.token_hex(16)  # Generate a verification code
     user.verification_code = verification_code
