@@ -56,7 +56,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: Inter, sans-serif;
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -66,5 +66,12 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   min-height: 100vh;
+}
+
+footer {
+  background: #022455;
+  margin-top: 10px;
+  position: sticky;
+  top: 100%;
 }
 

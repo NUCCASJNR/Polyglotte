@@ -5,7 +5,7 @@ from models import User, BlogPost
 from flask import redirect, url_for, render_template, request, flash, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Clean_Blog import app, bcrypt, db
-from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm
+from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm, BioForm
 
 
 # from models import storage
@@ -56,13 +56,24 @@ def logout():
     return redirect(url_for('index'))
 
 
-def save_picture(form_picture):
+def save_picture_profile(form_picture):
     random_hex = secrets.token_hex(8)
     _, file_extension = os.path.splitext(form_picture.filename)
     picture_filename = random_hex + file_extension
     picture_path = os.path.join(app.root_path, 'static/img/profile_pics', picture_filename)
-
     output_size = (500, 500)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    return picture_filename
+
+
+def save_picture_blog(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, file_extension = os.path.splitext(form_picture.filename)
+    picture_filename = random_hex + file_extension
+    picture_path = os.path.join(app.root_path, 'static/img/blog_pics', picture_filename)
+    output_size = (960, 540)
     i = Image.open(form_picture)
     i.thumbnail(output_size)
     i.save(picture_path)
@@ -73,9 +84,10 @@ def save_picture(form_picture):
 @login_required
 def account():
     form = UpdateForm()
+    bio_form = BioForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_picture_profile(form.picture.data)
             current_user.picture = picture_file
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
@@ -84,14 +96,19 @@ def account():
         db.session.commit()
         flash('Your account has successfully been updated', 'success')
         return redirect(url_for('account'))
+    if bio_form.validate_on_submit():
+        current_user.bio = bio_form.bio.data
+        db.session.commit()
+        return redirect(url_for('account'))
     elif request.method == 'GET':
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.username.data = current_user.username
         form.email.data = current_user.email
+        bio_form.bio.data = current_user.bio
     image_file = url_for('static', filename='img/profile_pics/{}'.format(current_user.picture))
     posts = BlogPost.query.order_by(BlogPost.created_at.desc()).filter_by(user=current_user).all()
-    return render_template('profile_page.html', form=form, image_file=image_file, posts=posts)
+    return render_template('profile_page.html', form=form, bio_form=bio_form, image_file=image_file, posts=posts)
 
 
 @app.route('/post/new', methods=['GET', 'POST'])
@@ -101,8 +118,10 @@ def new_post():
     if form.validate_on_submit():
         if form.category.data == '':
             form.category.data = 'Miscellaneous'
+        picture_file = save_picture_blog(form.picture.data)
         post = BlogPost(title=form.title.data, content=form.content.data, subheading=form.subheading.data,
-                        category=form.category.data, user=current_user)
+                        category=form.category.data, user=current_user, picture=picture_file)
+
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
@@ -130,6 +149,7 @@ def update_post(post_id):
         post.subheading = form.subheading.data
         post.category = form.category.data
         post.content = form.content.data
+        post.picture = form.picture.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('show_post', post_id=post_id))
@@ -138,6 +158,7 @@ def update_post(post_id):
         form.subheading.data = post.subheading
         form.category.data = post.category
         form.content.data = post.content
+        form.picture.data = post.picture
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post')
 

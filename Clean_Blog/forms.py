@@ -6,6 +6,8 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from models.user import User
+
+
 # from models import storage
 
 
@@ -59,7 +61,6 @@ class UpdateForm(FlaskForm):
                 flash('{} already exists'.format(username.data), 'danger')
                 raise ValidationError('This username already exists')
 
-
     def validate_email(self, email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
@@ -68,10 +69,16 @@ class UpdateForm(FlaskForm):
                 raise ValidationError('This email already exists')
 
 
+class BioForm(FlaskForm):
+    bio = TextAreaField('Bio', render_kw={'placeholder': 'Tell us about yourself...', 'rows': 5})
+    submit = SubmitField('Update')
+
+
 class PostForm(FlaskForm):
+    picture = FileField('Post Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    # render_kw={'style': 'display: none;'})
     title = StringField('Title', validators=[DataRequired()])
     subheading = StringField('Sub-Heading', validators=[DataRequired()])
     category = StringField('Category')
-    # content = TextAreaField('Content', validators=[DataRequired()], render_kw={'placeholder': 'Content', 'rows': '8'})
     content = CKEditorField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')

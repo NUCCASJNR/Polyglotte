@@ -1,7 +1,61 @@
-{% extends 'layout.html' %}
-{% block nav %}<nav class="navbar navbar-expand-md py-3 navbar-light" style="width: 100%;margin-bottom: 0px;background: #022455;border-bottom: 1px solid #b4ccef;padding-right: 50px;padding-left: 50px;"> {% endblock nav %}
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
 
-{% block content %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>polyglotte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+{#   <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">#}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Averia+Serif+Libre&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bree+Serif&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Text&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+HK&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap">
+    <link rel="stylesheet" href="../static/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NUCCASJNR/Polyglotte@Dev_Frankenstein_Flask_SQLAlchemy/Clean_Blog/static/css/Articles-Cards-images.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/NUCCASJNR/Polyglotte@Dev_Frankenstein_Flask_SQLAlchemy/Clean_Blog/static/css/styles.min.css">
+{#    <link rel="stylesheet" href="../static/css/post.css">#}
+{#    <link rel="stylesheet" href="../static/css/signin.css">#}
+{#    <link rel="stylesheet" href="../static/css/signup.css">#}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md sticky-top py-3 navbar-light">
+        <div class="container-fluid"><a class="navbar-brand d-flex align-items-center" href="#"><span class="bs-icon-sm bs-icon-rounded bs-icon-primary d-flex justify-content-center align-items-center me-2 bs-icon"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-bezier">
+                        <path fill-rule="evenodd" d="M0 10.5A1.5 1.5 0 0 1 1.5 9h1A1.5 1.5 0 0 1 4 10.5v1A1.5 1.5 0 0 1 2.5 13h-1A1.5 1.5 0 0 1 0 11.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm10.5.5A1.5 1.5 0 0 1 13.5 9h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM6 4.5A1.5 1.5 0 0 1 7.5 3h1A1.5 1.5 0 0 1 10 4.5v1A1.5 1.5 0 0 1 8.5 7h-1A1.5 1.5 0 0 1 6 5.5v-1zM7.5 4a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"></path>
+                        <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
+                    </svg></span><span style="font-family: ABeeZee, sans-serif;color: rgb(255,255,255);">Polyglotte</span></a><i class="icon ion-navicon-round navbar-toggler" id="nav-toggle" data-bs-toggle="collapse" data-bs-target="#navcol-3" style="font-size:30px;color:rgb(255,255,255);"></i>
+            <div class="collapse navbar-collapse" id="navcol-3">
+                <ul class="navbar-nav d-flex align-items-center mx-auto" style="color:rgb(255,255,255);transform:translate(0px);">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Our Story</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">New Post</a></li>
+                </ul>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('account') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Account</button></a>
+                    <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Logout</button></a>
+                {% else %}
+                    <a href="{{ url_for('login') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Login</button></a>
+                    <a href="{{ url_for('signup') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Sign Up</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+       {% if messages %}
+           {% for category, message in messages %}
+               <div class="alert alert-{{ category }}">
+                   {{ message }}
+               </div>
+           {% endfor %}
+       {% endif %}
+   {% endwith %}
     <section class="position-relative py-4 py-xl-5" style="width: 100%;margin: auto;transform: translate(0px) scale(1);">
         <div class="container position-relative">
             <form method="post" action="">
@@ -11,57 +65,71 @@
 {#                    <input class="form-control" type="text" id="name-2" name="Title" placeholder="Title">#}
                     {{ form.title.label }}
                     {% if form.title.errors %}
-                        {{ form.title(class="form-control form-control-lg is-invalid") }}
+                        {{ form.title(class="form-control form-control is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.title.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.title(class="form-control form-control-lg") }}
+                        {{ form.title(class="form-control form-control") }}
                     {% endif %}
                 </div>
                 <div class="mb-3">
 {#                    <input class="form-control" type="text" id="name-2" name="Title" placeholder="Title">#}
                     {{ form.subheading.label }}
                     {% if form.subheading.errors %}
-                        {{ form.subheading(class="form-control form-control-lg is-invalid") }}
+                        {{ form.subheading(class="form-control form-control- is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.subheading.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.subheading(class="form-control form-control-lg") }}
+                        {{ form.subheading(class="form-control form-control-") }}
                     {% endif %}
                 </div>
                 <div class="mb-3">
 {#                    <input class="form-control" type="text" id="name-2" name="Title" placeholder="Title">#}
                     {{ form.category.label }}
                     {% if form.category.errors %}
-                        {{ form.category(class="form-control form-control-lg is-invalid") }}
+                        {{ form.category(class="form-control form-control- is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.category.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.category(class="form-control form-control-lg") }}
+                        {{ form.category(class="form-control form-control-") }}
                     {% endif %}
                 </div>
                 <div class="mb-3">
 {#                    <textarea class="form-control" id="message-2" name="message" rows="8" placeholder="Content"></textarea>#}
-                    {{ form.content.title }}
+                    {{ form.content.label }}
                     {% if form.content.errors %}
-                        {{ form.content(class="form-control form-control-lg is-invalid") }}
+                        {{ form.content(class="form-control form-control- is-invalid") }}
                         <div class="invalid-feedback">
                             {% for error in form.content.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.content(class="form-control form-control-lg") }}
+                        {{ form.content(class="form-control form-control-") }}
                     {% endif %}
+                </div>
+                <div class="mb-3">
+                    {{ form.picture.label }}
+                    {% if form.picture.errors %}
+                        {{ form.picture(class="form-control form-control- is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.picture.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.picture(class="form-control form-control") }}
+                    {% endif %}
+
                 </div>
             <div class="form-group mt-3 mb-3">
                {{ form.submit(class="btn btn-primary") }}
@@ -73,5 +141,25 @@
         </div>
 
     </section>
-{% endblock content %}
-{% block footer %}     <footer class="text-center py-4 fixed-bottom" style="background: #022455;margin-top: 10px;"> {% endblock footer %}
+    <footer class="text-center py-4">
+        <div class="container">
+            <div class="row row-cols-1 row-cols--3">
+                <div class="col">
+                    <p class="my-2" style="color: var(--bs-body-bg);font-family: Inter, sans-serif;">Copyright&nbsp;© 2023 Polyglotte</p>
+                </div>
+                <div class="col"></div>
+                <div class="col">
+                    <ul class="list-inline my-2" style="font-family: Inter, sans-serif;">
+                        <li class="list-inline-item list-inline-item"><a href="#" style="color:var(--bs-secondary-bg);">Privacy Policy</a></li>
+                        <li class="list-inline-item list-inline-item"><a href="#" style="color:var(--bs-secondary-bg);">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+{#    <script src="../static/bootstrap/js/bootstrap.min.js"></script>#}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+
+
+</html>

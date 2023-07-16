@@ -48,11 +48,20 @@
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+       {% if messages %}
+           {% for category, message in messages %}
+               <div class="alert alert-{{ category }}">
+                   {{ message }}
+               </div>
+           {% endfor %}
+       {% endif %}
+   {% endwith %}
     <section class="text-center profile-card" style="background-color: #ffffff;padding-top: 0px;">
-        <div class="d-flex d-lg-flex profile-card-img" style="height: 600px;background: linear-gradient(white 0%, rgba(2,36,85,0.79) 0%), url(&quot;assets/img/pexels-kaique-rocha-242133.jpg&quot;) center / cover repeat-x, #ffffff;">
-            <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src="assets/img/avatar-dhg.png" height="150px">
+        <div class="d-flex d-lg-flex profile-card-img" style="height: 600px;background: linear-gradient(white 0%, rgba(2,36,85,0.79) 0%), url(&quot;../static/img/pexels-kaique-rocha-242133.jpg&quot;) center / cover repeat-x, #ffffff;">
+            <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src={{ image_file }} height="150px">
                 <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">{{ current_user.first_name}} {{ current_user.last_name }}</h3>
-                <p style="padding: 18px;padding-bottom: 0;padding-top: 0px;font-size: 32px;color: var(--bs-body-bg);font-family: Inter, sans-serif;">@{{ current_user.username }}</p>
+                <p style="padding: 18px;padding-bottom: 0;padding-top: 0px;font-size: 24px;color: var(--bs-body-bg);font-family: Inter, sans-serif;">@{{ current_user.username }}</p>
                 <div class="d-md-flex justify-content-md-center align-items-md-center" style="margin-top:10px;">
                     <button class="btn btn-primary d-md-flex" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Edit Profile</button>
                     <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
@@ -66,7 +75,7 @@
                                         {{ form.hidden_tag() }}
                                         <div class="row modal-row" style="margin-bottom: 20px;text-align: left;margin-right: 0px;margin-left: 0px;">
                                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12" style="display:inline;text-align:center;margin-bottom:0px;height:300px;">
-                                                <img class="rounded-circle img-fluid mb-3 mt-4" src="{{ image_file }}" style="display:inline;max-height:200px;width:200px;height:200px;"><br>
+                                                <img id="profile_pic" class="rounded-circle img-fluid mb-3 mt-4" src="{{ image_file }}" style="display:inline;max-height:200px;width:200px;height:200px;"><br>
                                                 <label for="input_file" class="btn btn-primary btn-sm">Change Picture</label>
                                                 {{ form.picture(class="btn btn-primary btn-sm", id="input_file") }}
                                                 {% if form.picture.errors %}
@@ -139,9 +148,67 @@
     </section>
     <section>
         <div class="container" style="padding-top: 50px;padding-bottom: 20px;">
-            <div>
-                <h3>Bio</h3>
-                <p class="d-flex d-lg-flex justify-content-center align-items-center bio"><span style="color: rgb(0, 0, 0);">Joseph, the embodiment of elegance and confidence, commands the runway with a captivating presence that effortlessly breathes life into every garment he wears. With striking features and eyes that hold a thousand stories, Jonathan's chameleon-like ability to transform from one stunning persona to the next is awe-inspiring. Beyond his magnetic allure, he embraces the visions of designers, turning their creations into iconic masterpieces. A true role model, Jonathan utilizes his platform for positive change, setting him apart in the fashion industry. Welcome to the extraordinary world of Jonathan, where style becomes art, and every step tells a mesmerizing story.</span></p>
+            <div class="bio-edit">
+                <h3 class="d-inline-block">Bio</h3>
+                {% if current_user.bio %}
+                <a href="#" data-bs-target="#modal-2" data-bs-toggle="modal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil-square">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                    </svg>
+                </a>
+                {% endif %}
+            </div>
+            <div class="bio">
+                {% if current_user.bio %}
+                    <p class="d-flex d-lg-flex align-items-center bio">
+                        {{ current_user.bio }}
+                    </p>
+
+                {% else %}
+{#                #}
+{#                    Joseph, the embodiment of elegance and confidence, commands the runway with a captivating presence that effortlessly breathes life into every garment he wears. With striking features and eyes that hold a thousand stories, Jonathan's chameleon-like ability to transform from one stunning persona to the next is awe-inspiring. Beyond his magnetic allure, he embraces the visions of designers, turning their creations into iconic masterpieces. A true role model, Jonathan utilizes his platform for positive change, setting him apart in the fashion industry. Welcome to the extraordinary world of Jonathan, where style becomes art, and every step tells a mesmerizing story.#}
+{#                #}
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modal-2">Add a Bio</a>
+                {% endif %}
+                <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background: rgb(2,36,85);color: rgb(255,255,255);">
+                                    <h4 class="modal-title">Add a Bio</h4><button class="btn-close btn-close-white" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body" style="padding: 0px 0px;">
+                                    <form id="bio_form" action="" method="POST" enctype="multipart/form-data">
+                                        {{ bio_form.hidden_tag() }}
+                                        <div class="row modal-row" style="">
+                                            <div class="col-md-12 text-start">
+                                                <div class="">
+                                                    {% if bio_form.bio.errors %}
+                                                        {{ bio_form.bio(class="form-control fc is-invalid") }}
+                                                        <div class="invalid-feedback">
+                                                            {% for error in bio_form.bio.errors %}
+                                                                <span>{{ error }}</span>
+                                                            {% endfor %}
+                                                        </div>
+                                                    {% else %}
+                                                        {{ bio_form.bio(class="form-control fc") }}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <p class="text-danger" id="emailErrorMsg" style="display:none;"></p>
+                                                <p class="text-danger" id="passwordErrorMsg" style="display:none;"></p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer" style="background: rgb(2,36,85);">
+                                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                            {{ bio_form.submit(class="btn btn-primary") }}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </section>
@@ -204,6 +271,7 @@
         </div>
     </footer>
     <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/profile.js"></script>
 </body>
 
 </html>

@@ -12,6 +12,13 @@ h3 {
   padding-right: 20px;
 }
 
+#modal-2 .modal-row {
+  margin-top: 20px;
+}
+
+#modal-2 textarea {
+  padding: 5px 10px;
+}
 .modal-footer {
   background: rgb(2, 36, 85);
 }
@@ -20,6 +27,16 @@ h3 {
   font-family: Inter, sans-serif;
   margin-right: 0px;
   font-size: 20px;
+}
+
+.bio-edit a {
+  display: none;
+}
+
+.bio-edit:hover a {
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 
