@@ -23,6 +23,30 @@
 {#    <link rel="stylesheet" href="../static/css/post.css">#}
 {#    <link rel="stylesheet" href="../static/css/signin.css">#}
 {#    <link rel="stylesheet" href="../static/css/signup.css">#}
+    <style>
+
+        body {
+            top: 0 !important;
+        }
+
+        nav .goog-te-banner-frame {
+        }
+
+        nav .goog-logo-link {
+            display: none !important;
+        }
+
+        nav .goog-te-gadget {
+            margin-top: 15px !important;
+            color: transparent !important;
+            margin-left: 20px !important;
+        }
+
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd, #goog-gt-tt{
+            display: none !important;
+        }
+        nav .
+    </style>
 </head>
 
 <body>
@@ -36,7 +60,10 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">Our Story</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('new_post') }}" style="color: rgb(255,255,255);font-size: 16px;font-family: ABeeZee, sans-serif;">New Post</a></li>
+                    <li class="nav-item"><div id="google_translate_element"></div></li>
+
                 </ul>
+                <div class="d-flex justify-content-center">
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('account') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Account</button></a>
                     <a href="{{ url_for('logout') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Logout</button></a>
@@ -44,6 +71,7 @@
                     <a href="{{ url_for('login') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Login</button></a>
                     <a href="{{ url_for('signup') }}"><button class="btn btn-primary" type="button" style="margin-right: 5px;font-family: ABeeZee, sans-serif;">Sign Up</button></a>
                 {% endif %}
+                </div>
             </div>
         </div>
     </nav>
@@ -104,6 +132,15 @@
         </div>
     </footer>
     <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
 </body>
 
 </html>

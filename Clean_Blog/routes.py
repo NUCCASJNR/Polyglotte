@@ -68,18 +68,6 @@ def save_picture_profile(form_picture):
     return picture_filename
 
 
-def save_picture_blog(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, file_extension = os.path.splitext(form_picture.filename)
-    picture_filename = random_hex + file_extension
-    picture_path = os.path.join(app.root_path, 'static/img/blog_pics', picture_filename)
-    output_size = (960, 540)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-    i.save(picture_path)
-    return picture_filename
-
-
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
@@ -111,16 +99,31 @@ def account():
     return render_template('profile_page.html', form=form, bio_form=bio_form, image_file=image_file, posts=posts)
 
 
+def save_picture_blog(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, file_extension = os.path.splitext(form_picture.filename)
+    picture_filename = random_hex + file_extension
+    picture_path = os.path.join(app.root_path, 'static/img/blog_pics', picture_filename)
+    output_size = (960, 540)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+    i.save(picture_path)
+    return picture_filename
+
+
 @app.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
+    post = BlogPost()
     if form.validate_on_submit():
         if form.category.data == '':
             form.category.data = 'Miscellaneous'
-        picture_file = save_picture_blog(form.picture.data)
+            if form.picture.data:
+                picture_file = save_picture_blog(form.picture.data)
+                post.picture = picture_file
         post = BlogPost(title=form.title.data, content=form.content.data, subheading=form.subheading.data,
-                        category=form.category.data, user=current_user, picture=picture_file)
+                        category=form.category.data, user=current_user)
 
         db.session.add(post)
         db.session.commit()
