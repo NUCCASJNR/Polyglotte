@@ -6,15 +6,47 @@ from flask import redirect, url_for, render_template, request, flash, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from Clean_Blog import app, bcrypt, db
 from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm, BioForm
-
-
-# from models import storage
+from datetime import datetime, timedelta
+from os import getenv
+import requests
 
 
 @app.route('/')
 def index():
     posts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
     return render_template('index.html', posts=posts)
+
+def send_verification_email(user):
+    verification_code = secrets.token_hex(16)  # Generate a verification code
+    user.verification_code = verification_code
+    user.verification_expires_at = datetime.utcnow() + timedelta(minutes=1) 
+    db.session.commit()
+
+    verification_url = url_for('verify', verification_code=verification_code, _external=True, _scheme='https')
+
+
+    # Create the email content
+    html_body = render_template('verification_email.html', username=user.username, verification_url=verification_url)
+    api_key = getenv('elastic_API')
+    print(api_key)
+    from_email = 'polyglotte@polyglotte.tech'
+    to_email = user.email
+    subject = 'Account Verification'
+    url = 'https://api.elasticemail.com/v2/email/send'
+
+    payload = {
+        'apikey': api_key,
+        'from': from_email,
+        'to': to_email,
+        'subject': subject,
+        'bodyHtml': html_body,
+        'isTransactional': False
+    }
+
+    response = requests.post(url, data=payload)
+    if response.status_code == 200:
+        return True
+    return False
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -24,13 +56,44 @@ def signup():
     form = SignupForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(first_name=form.first_name.data, last_name=form.last_name.data, email=form.email.data,
-                    username=form.username.data, password=hashed_password)
+        user = User(
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email.data,
+            username=form.username.data,
+            password=hashed_password,
+            verified=False  # Set initial verification status to False
+        )
         db.session.add(user)
         db.session.commit()
-        flash('Your account has been created. You can now login', 'success')
+
+        send_verification_email(user)
+
+        flash('Your account has been created. Check your email for verification instructions', 'success')
         return redirect(url_for('index'))
     return render_template('signup.html', title='Sign Up', form=form)
+
+
+@app.route('/verify/<string:verification_code>', methods=['GET', 'POST'])
+def verify(verification_code):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    user = User.query.filter_by(verification_code=verification_code).first()
+    if user:
+        if user.verification_expires_at and datetime.utcnow() > user.verification_expires_at:
+            flash('The verification link has expired.', 'danger')
+            return redirect(url_for('index'))
+        user.verified = True
+        user.verification_code = None  
+        db.session.commit()
+        login_user(user)
+        flash('Your account has been verified and you have been logged in!', 'success')
+    else:
+        flash('Invalid verification code. Please try again.', 'danger')
+
+    return redirect(url_for('index'))
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
