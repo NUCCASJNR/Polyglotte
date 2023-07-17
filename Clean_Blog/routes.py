@@ -19,7 +19,7 @@ def index():
 def send_verification_email(user):
     verification_code = secrets.token_hex(16)  # Generate a verification code
     user.verification_code = verification_code
-    user.verification_expires_at = datetime.utcnow() + timedelta(minutes=30) 
+    user.verification_expires_at = datetime.utcnow() + timedelta(minutes=5) 
     db.session.commit()
 
     verification_url = url_for('verify', verification_code=verification_code, _external=True, _scheme='https')
