@@ -3,7 +3,7 @@
     <section class="text-center profile-card" style="background-color: #ffffff;padding-top: 0px;">
         <div class="d-flex d-lg-flex profile-card-img" style="height: 600px;background: linear-gradient(white 0%, rgba(2,36,85,0.79) 0%), url(&quot;../static/img/pexels-kaique-rocha-242133.jpg&quot;) center / cover repeat-x, #ffffff;">
             <div style="margin:auto;"><img class="rounded-circle" style="margin-top:-70px;width:200px;height:200px;" src={{ image_file }} height="150px">
-                <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">{{ current_user.first_name}} {{ current_user.last_name }}</h3>
+                <h3 style="font-size:36px;color:var(--bs-body-bg);margin-bottom:0px;">{{ current_user.first_name }} {{ current_user.last_name }}</h3>
                 <p style="padding: 18px;padding-bottom: 0;padding-top: 0px;font-size: 24px;color: var(--bs-body-bg);font-family: Inter, sans-serif;">@{{ current_user.username }}</p>
                 <div class="d-md-flex justify-content-md-center align-items-md-center" style="margin-top:10px;">
                     <button class="btn btn-primary d-md-flex" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">Edit Profile</button>
@@ -163,7 +163,7 @@
             <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
                 {% for post in posts %}
                         <div class="col">
-                            <div class="card" style="border-radius: 0px;border-width: 0px;border-top-left-radius: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-top-left-radius: 5px;border-top-right-radius: 5px;" src="{{ url_for('static', filename='img/{}'.format(post.picture)) }}">
+                            <div class="card" style="border-radius: 0px;border-width: 0px;border-top-left-radius: 0px;"><img class="card-img-top w-100 d-block card-img-top w-100 card-img-top w-100 card-img-top w-100 fit-cover" style="height: 200px;border-top-left-radius: 5px;border-top-right-radius: 5px;" src="{{ url_for('static', filename='img/blog_pics/{}'.format(post.picture)) }}">
                                 <div class="card-body d-xl-flex align-items-xl-center p-4" style="min-height: 195.188px;max-height: 195.188px;background: #022455;border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;">
                                     <div style="font-family: Inter, sans-serif;">
                                         <p class="d-inline card-text mb-0" style="color: rgb(255,255,255);background: #3b475b;padding: 5px;border-radius: 5px;">

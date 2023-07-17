@@ -48,6 +48,12 @@
         .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd, #goog-gt-tt{
             display: none !important;
         }
+
+        @media (max-width: 767px) {
+            nav .goog-te-gadget {
+            margin-left: 0 !important;
+            }
+        }
     </style>
 </head>
 
@@ -80,7 +86,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
        {% if messages %}
            {% for category, message in messages %}
-               <div class="alert alert-{{ category }}">
+               <div class="alert alert-{{ category }} mb-0">
                    {{ message }}
                </div>
            {% endfor %}
@@ -163,7 +169,7 @@
             </div>
         </div>
     </section>
-    <footer class="text-center py-4" style="position: relative;background: #022455;margin-top: 10px;">
+    <footer class="text-center py-4">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
                 <div class="col">

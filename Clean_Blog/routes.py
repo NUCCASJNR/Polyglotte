@@ -115,15 +115,19 @@ def save_picture_blog(form_picture):
 @login_required
 def new_post():
     form = PostForm()
-    post = BlogPost()
     if form.validate_on_submit():
         if form.category.data == '':
             form.category.data = 'Miscellaneous'
+        if form.picture.data:
+            picture_filename = save_picture_blog(form.picture.data)
+        else:
+            picture_filename = None
         post = BlogPost(title=form.title.data, content=form.content.data, subheading=form.subheading.data,
-                        category=form.category.data, user=current_user)
+                        category=form.category.data, picture=picture_filename, user=current_user)
 
         db.session.add(post)
         db.session.commit()
+
         flash('Your post has been created!', 'success')
         return redirect(url_for('index'))
     return render_template('create_post.html', title='New Post',
@@ -133,7 +137,7 @@ def new_post():
 @app.route('/post/<string:post_id>')
 def show_post(post_id):
     post = BlogPost.query.get_or_404(post_id)
-    post_picture = url_for('static', filename='img/{}'.format(post.picture))
+    post_picture = url_for('static', filename='img/blog_pics/{}'.format(post.picture))
     return render_template('post_page.html', title=post.title, post=post, picture=post_picture)
 
 
@@ -149,6 +153,11 @@ def update_post(post_id):
         post.subheading = form.subheading.data
         post.category = form.category.data
         post.content = form.content.data
+        if form.picture.data:
+            picture_filename = save_picture_blog(form.picture.data)
+            post.picture = picture_filename
+        else:
+            post.picture = 'default_post.jpg'
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('show_post', post_id=post_id))
@@ -157,6 +166,7 @@ def update_post(post_id):
         form.subheading.data = post.subheading
         form.category.data = post.category
         form.content.data = post.content
+        form.picture.data = post.picture
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
