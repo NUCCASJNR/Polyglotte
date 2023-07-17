@@ -31,6 +31,7 @@ class User(BaseModel, db.Model, UserMixin):
     blog_posts = db.relationship('BlogPost', back_populates='user', lazy=True)
     followers = db.relationship('Follower', back_populates='user')
     following = db.relationship('Following', back_populates='user')
+    verified = db.Column(db.Boolean, nullable=False, default=False)
     verification_code = db.Column(db.String(60))
     verification_expires_at = db.Column(db.DateTime, nullable=True)
 
