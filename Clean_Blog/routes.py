@@ -83,6 +83,7 @@ def verify(verification_code):
     if user:
         if user.verification_expires_at and datetime.utcnow() > user.verification_expires_at:
             db.session.delete(user)
+            db.session.commit()
             flash('The verification link has expired. Please signup again to recieve a new verification code', 'danger')
             return redirect(url_for('index'))
         user.verified = True
@@ -104,17 +105,21 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user.verified == 0:
-            flash('You need to verify your account before you can login')
-            return redirect(url_for('index'))
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            flash('You have been logged in!', 'success')
-            return redirect(next_page) if next_page else redirect(url_for('index'))
+        if user is not None:
+            if user.verified:
+                if bcrypt.check_password_hash(user.password, form.password.data):
+                    login_user(user, remember=form.remember.data)
+                    next_page = request.args.get('next')
+                    flash('You have been logged in!', 'success')
+                    return redirect(next_page) if next_page else redirect(url_for('index'))
+                else:
+                    flash('Login Unsuccessful. Please check your username and password', 'danger')
+            else:
+                flash('You need to verify your account before you can log in', 'danger')
         else:
             flash('Login Unsuccessful. Please check your username and password', 'danger')
     return render_template('signin.html', title='Sign In', form=form)
+
 
 
 @app.route('/logout')
