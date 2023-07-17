@@ -82,7 +82,8 @@ def verify(verification_code):
     user = User.query.filter_by(verification_code=verification_code).first()
     if user:
         if user.verification_expires_at and datetime.utcnow() > user.verification_expires_at:
-            flash('The verification link has expired.', 'danger')
+            db.session.delete(user)
+            flash('The verification link has expired. Please signup again to recieve a new verification code', 'danger')
             return redirect(url_for('index'))
         user.verified = True
         user.verification_code = None  
