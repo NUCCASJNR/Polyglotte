@@ -42,18 +42,28 @@
             </div>
         </div>
     </nav>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+       {% if messages %}
+           {% for category, message in messages %}
+               <div class="alert alert-{{ category }}">
+                   {{ message }}
+               </div>
+           {% endfor %}
+       {% endif %}
+   {% endwith %}
     <section style="background: #022455;">
         <div class="container d-lg-flex justify-content-lg-center align-items-lg-center" style="padding-top: 50px;padding-bottom: 50px;">
             <div style="font-family: 'Open Sans', sans-serif;color: rgb(255,255,255);width: 100%;margin-top: 0px;margin-bottom: 0px;">
-                <h1 class="fw-semibold">What is Esports?</h1>
-                <h1 class="subheading">Consequat gravida pharetra est, luctus aliquet eleifend leo ipsum curae. Mauris erat egestas augue, lacinia est. Rutrum congue sapien, ullamcorper quisque dapibus egestas eget donec.</h1>
+                <h1 class="fw-semibold">{{ post.title }}</h1>
+                <h1 class="subheading">{{ post.subheading }}</h1>
                 <div class="d-lg-flex align-items-lg-center post-info">
-                    <p><strong>BY</strong>: Matt Damon</p>
-                    <p><strong>PUBLISHED</strong>: 20 Jan, 2023</p>
+                    <p><strong>BY: </strong>{{ post.user.first_name }} {{ post.user.last_name }}</p>
+                    <p><strong>PUBLISHED</strong>{{ post.created_at.strftime('%d %B, %Y') }}</p>
                     <p><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 3px;font-size: 20px;margin-bottom: 0px;">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8V16C2 16.5523 2.44772 17 3 17H16.6202C16.9121 17 17.1895 16.8724 17.3795 16.6508L20.808 12.6508C21.129 12.2763 21.129 11.7237 20.808 11.3492L17.3795 7.34921C17.1895 7.12756 16.9121 7 16.6202 7H3C2.44772 7 2 7.44772 2 8ZM0 8V16C0 17.6569 1.34315 19 3 19H16.6202C17.496 19 18.328 18.6173 18.898 17.9524L22.3265 13.9524C23.2895 12.8289 23.2895 11.1711 22.3265 10.0476L18.898 6.04763C18.328 5.38269 17.496 5 16.6202 5H3C1.34315 5 0 6.34315 0 8Z" fill="currentColor"></path>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13ZM15 15C16.6569 15 18 13.6569 18 12C18 10.3431 16.6569 9 15 9C13.3431 9 12 10.3431 12 12C12 13.6569 13.3431 15 15 15Z" fill="currentColor"></path>
-                        </svg>Gaming</p>
+                        </svg>
+                        {{ post.category }}</p>
                 </div>
             </div><a data-bs-toggle="tooltip" data-bss-tooltip="" href="#" title="Edit Post"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil text-light float-end" style="font-size: 25px;display: inline-block;">
                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
@@ -66,7 +76,8 @@
     <section style="padding-top: 30px;">
         <div class="container">
             <div style="margin-bottom: 20px;">
-                <p style="width: 100%;margin-right: auto;margin-left: auto;margin-bottom: 0px;font-family: Inter, sans-serif;font-size: 18px;">Consequat gravida pharetra est, luctus aliquet eleifend leo ipsum curae. Mauris erat egestas augue, lacinia est. Rutrum congue sapien, ullamcorper quisque dapibus egestas eget donec. Fermentum amet praesent rutrum interdum metus praesent, dictumst augue a curabitur. Cras imperdiet nec fermentum lobortis augue, viverra etiam. Metus orci habitasse aliquam ante, elementum eros. Urna ultrices vulputate, congue sapien gravida. Inceptos nostra convallis etiam, sagittis rhoncus est ultricies. Gravida molestie dictumst purus donec posuere imperdiet, id elementum etiam. Condimentum mattis amet praesent aliquam, varius justo mollis bibendum. Egestas dictum massa taciti cursus praesent non magna, tempus sociosqu. Elit sagittis aptent ligula platea, at sagittis lobortis rhoncus. Vestibulum curabitur per scelerisque interdum varius, senectus habitant erat sapien. Eleifend aliquet imperdiet dictum, litora commodo. Risus sollicitudin integer, curabitur fermentum cubilia quis. Blandit mollis fringilla iaculis, adipiscing vitae. Vel eu torquent lectus, porta sollicitudin. <br><br>Malesuada consequat morbi, massa varius habitasse pharetra etiam sit. Inceptos sociosqu turpis suscipit mi sodales, conubia praesent. Tempor commodo iaculis fames lorem sit et, etiam egestas pellentesque phasellus. Mauris conubia congue nam nec leo, aptent aenean. Ante vitae eu pharetra nullam elit, consectetur maecenas tempus interdum. Sed sollicitudin fermentum faucibus, litora suspendisse urna cursus neque integer scelerisque. Pharetra tristique magna suscipit elementum sagittis magna, sed dolor. Conubia vel suscipit, diam taciti duis. Suscipit in porttitor auctor erat. Nunc suspendisse amet lorem nisi, porta euismod sapien bibendum. Pretium semper lacus ut cras. Senectus etiam auctor aliquam aliquet, mauris tellus. Quis ligula arcu phasellus imperdiet. Sodales cubilia fringilla scelerisque placerat blandit tempus, curabitur egestas elit. Pellentesque risus fames vitae ligula ad, ornare pretium congue. <br><br>Vestibulum neque vivamus per, condimentum erat. Dapibus cubilia in ultricies platea magna consequat, pretium eleifend non. Aliquam mattis senectus netus quam. Purus lacinia lorem at diam consectetur, turpis porta elit et lacus. Risus conubia cubilia dapibus praesent, lacus nostra. Lacus posuere potenti pretium facilisis, sollicitudin ligula proin tortor duis sed. Id tortor turpis felis ante. Hac vitae praesent, tincidunt morbi feugiat. Justo sollicitudin duis morbi arcu. Ligula dapibus varius hac leo, pharetra neque. Aenean eu praesent sodales, proin semper eros hac volutpat fames curabitur. Lorem phasellus vulputate sapien dolor nostra, augue dolor taciti facilisis. Litora vitae per elit habitasse massa, duis maecenas ultricies tincidunt felis. Eros mauris nostra taciti, scelerisque arcu torquent hendrerit himenaeos. <br><br>Ornare scelerisque duis curabitur velit. Condimentum rutrum eget erat taciti. Id ligula neque, curae eu odio. Quis sollicitudin massa mauris, odio inceptos phasellus gravida. Etiam libero risus facilisis enim at commodo congue, ultrices in vehicula. Integer vestibulum gravida felis, imperdiet est. Dolor nullam duis pulvinar diam nec sollicitudin integer sed, condimentum turpis. Cubilia fames curabitur phasellus senectus. Commodo adipiscing donec nisi curabitur quisque tortor, velit semper phasellus. Primis in mi himenaeos ultrices bibendum, cras at faucibus ante quam. <br><br>Per integer lectus, nulla adipiscing nisi ligula est. Pellentesque eu euismod sed, at etiam vestibulum. Phasellus massa molestie ultricies pulvinar, eu interdum arcu. Habitasse et orci, pellentesque venenatis sollicitudin ante. Sollicitudin quam venenatis auctor, accumsan lacinia orci hendrerit. Dictum donec velit porttitor etiam, torquent tortor id aenean. Felis.</p>
+                <p style="width: 100%;margin-right: auto;margin-left: auto;margin-bottom: 0px;font-family: Inter, sans-serif;font-size: 18px;">
+                    {{ post.content|safe }}</p>
             </div>
         </div>
     </section>
