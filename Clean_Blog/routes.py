@@ -28,7 +28,6 @@ def send_verification_email(user):
     # Create the email content
     html_body = render_template('verification_email.html', username=user.username, verification_url=verification_url)
     api_key = getenv('elastic_API')
-    print(api_key)
     from_email = 'polyglotte@polyglotte.tech'
     to_email = user.email
     subject = 'Account Verification'
