@@ -119,9 +119,6 @@ def new_post():
     if form.validate_on_submit():
         if form.category.data == '':
             form.category.data = 'Miscellaneous'
-            if form.picture.data:
-                picture_file = save_picture_blog(form.picture.data)
-                post.picture = picture_file
         post = BlogPost(title=form.title.data, content=form.content.data, subheading=form.subheading.data,
                         category=form.category.data, user=current_user)
 
@@ -152,7 +149,6 @@ def update_post(post_id):
         post.subheading = form.subheading.data
         post.category = form.category.data
         post.content = form.content.data
-        post.picture = form.picture.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('show_post', post_id=post_id))
@@ -161,7 +157,6 @@ def update_post(post_id):
         form.subheading.data = post.subheading
         form.category.data = post.category
         form.content.data = post.content
-        form.picture.data = post.picture
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
