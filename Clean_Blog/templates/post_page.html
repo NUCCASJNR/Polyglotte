@@ -21,9 +21,9 @@
     <link rel="stylesheet" href="../static/css/Navbar-Centered-Brand-Dark-icons.css">
     <link rel="stylesheet" href="../static/css/styles.css">
     <link rel="stylesheet" href="../static/css/post.css">
-    <link rel="stylesheet" href="../static/css/profile.css">
-    <link rel="stylesheet" href="../static/css/signin.css">
-    <link rel="stylesheet" href="../static/css/signup.css">
+{#    <link rel="stylesheet" href="../static/css/profile.css">#}
+{#    <link rel="stylesheet" href="../static/css/signin.css">#}
+{#    <link rel="stylesheet" href="../static/css/signup.css">#}
 
 
     <style>
@@ -47,6 +47,12 @@
 
         .VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-ORHb-OEVmcd, #goog-gt-tt{
             display: none !important;
+        }
+
+        @media (max-width: 767px) {
+            nav .goog-te-gadget {
+            margin-left: 0 !important;
+            }
         }
     </style>
 </head>
@@ -80,7 +86,7 @@
     {% with messages = get_flashed_messages(with_categories=true) %}
        {% if messages %}
            {% for category, message in messages %}
-               <div class="alert alert-{{ category }}">
+               <div class="alert alert-{{ category }} mb-0">
                    {{ message }}
                </div>
            {% endfor %}
@@ -93,30 +99,77 @@
                 <h1 class="subheading">{{ post.subheading }}</h1>
                 <div class="d-lg-flex align-items-lg-center post-info">
                     <p><strong>BY: </strong>{{ post.user.first_name }} {{ post.user.last_name }}</p>
-                    <p><strong>PUBLISHED</strong>{{ post.created_at.strftime('%d %B, %Y') }}</p>
+                    <p><strong>PUBLISHED: </strong>{{ post.created_at.strftime('%d %B, %Y') }}</p>
                     <p><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="margin-right: 3px;font-size: 20px;margin-bottom: 0px;">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 8V16C2 16.5523 2.44772 17 3 17H16.6202C16.9121 17 17.1895 16.8724 17.3795 16.6508L20.808 12.6508C21.129 12.2763 21.129 11.7237 20.808 11.3492L17.3795 7.34921C17.1895 7.12756 16.9121 7 16.6202 7H3C2.44772 7 2 7.44772 2 8ZM0 8V16C0 17.6569 1.34315 19 3 19H16.6202C17.496 19 18.328 18.6173 18.898 17.9524L22.3265 13.9524C23.2895 12.8289 23.2895 11.1711 22.3265 10.0476L18.898 6.04763C18.328 5.38269 17.496 5 16.6202 5H3C1.34315 5 0 6.34315 0 8Z" fill="currentColor"></path>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13ZM15 15C16.6569 15 18 13.6569 18 12C18 10.3431 16.6569 9 15 9C13.3431 9 12 10.3431 12 12C12 13.6569 13.3431 15 15 15Z" fill="currentColor"></path>
                         </svg>
                         {{ post.category }}</p>
                 </div>
-            </div><a data-bs-toggle="tooltip" data-bss-tooltip="" href="#" title="Edit Post"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pencil text-light float-end" style="font-size: 25px;display: inline-block;">
-                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"></path>
-                </svg></a>
+            </div>
+            {% if current_user == post.user %}
+            <div class="float-end dropdown">
+                <svg class="bi bi-pencil-square" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" data-bs-toggle="dropdown" fill="currentColor" viewBox="0 0 16 16" style="font-size: 25px;color: white;">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+                </svg>
+            <div class="dropdown-menu" style="background: var(--bs-dropdown-bg);">
+                <a class="dropdown-item" href="{{ url_for('update_post', post_id=post.id) }}" style="color: var(--bs-dropdown-color);">Edit Post</a>
+                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" style="color: red;">Delete Post</a>
+            </div>
         </div>
+            {% endif %}
+        </div>
+        <div class="modal fade" role="dialog" tabindex="-1" id="deleteModal">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header" style="background: rgb(2,36,85);color: rgb(255,255,255);">
+                                    <h4 class="modal-title">Delete Post?</h4><button class="btn-close btn-close-white" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container">
+                                        <p class="text-center">Are you sure you want to delete this post?</p>
+                                    </div>
+                                    <form id="delete_form" action="{{ url_for('delete_post', post_id=post.id) }}" method="POST" enctype="multipart/form-data">
+                                        <div class="modal-footer" style="background: rgb(2,36,85);">
+                                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                                            <input class="btn btn-danger" type="submit" value="Delete">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+{#        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true">#}
+{#      <div class="modal-dialog modal-dialog-centered" role="document">#}
+{#        <div class="modal-content">#}
+{#          <div class="modal-header">#}
+{#            <h5 class="modal-title" id="deleteModalTitle">Delete Post?</h5>#}
+{#            <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#              <span aria-hidden="true">&times;</span>#}
+{#            </button>#}
+{#          </div>#}
+{#          <div class="modal-footer">#}
+{#            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>#}
+{#            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">#}
+{#                <input class="btn btn-danger" type="submit" value="Delete">#}
+{#            </form>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
     </section>
     <section>
         <div class="container d-lg-flex justify-content-lg-center align-items-lg-center" style="padding-top: 20px;"><img src="{{ picture }}" style="width: 100%;"></div>
     </section>
     <section style="padding-top: 30px;">
         <div class="container">
-            <div style="margin-bottom: 20px;">
-                <p style="width: 100%;margin-right: auto;margin-left: auto;margin-bottom: 0px;font-family: Inter, sans-serif;font-size: 18px;">
-                    {{ post.content|safe }}</p>
+            <div class="paragraph">
+                {{ post.content|safe }}
             </div>
         </div>
     </section>
-    <footer class="text-center py-4" style="position: relative;background: #022455;margin-top: 10px;">
+    <footer class="text-center py-4">
         <div class="container">
             <div class="row row-cols-1 row-cols-lg-3">
                 <div class="col">
