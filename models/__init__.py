@@ -9,6 +9,3 @@ from models.user import User
 from models.blog_post import BlogPost
 from models.comment import Comment
 from models.follower import Follower
-storage = Storage()
-storage.reload()
-all_objects = storage.all()

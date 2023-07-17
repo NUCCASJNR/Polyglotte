@@ -1,14 +1,17 @@
 import os.path
 import secrets
-from PIL import Image
-from models import User, BlogPost
-from flask import redirect, url_for, render_template, request, flash, abort
-from flask_login import login_user, current_user, logout_user, login_required
-from Clean_Blog import app, bcrypt, db
-from Clean_Blog.forms import SignupForm, LoginForm, UpdateForm, PostForm, BioForm
 from datetime import datetime, timedelta
 from os import getenv
+
 import requests
+from flask import abort, flash, redirect, render_template, request, url_for
+from flask_login import current_user, login_required, login_user, logout_user
+from PIL import Image
+
+from Clean_Blog import app, bcrypt, db
+from Clean_Blog.forms import (BioForm, LoginForm, PostForm, SignupForm,
+                              UpdateForm)
+from models import BlogPost, User
 
 
 @app.route('/')
