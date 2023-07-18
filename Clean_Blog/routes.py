@@ -99,6 +99,11 @@ def verify(verification_code):
     return redirect(url_for('index'))
 
 
+@app.route('/user/<string:username>')
+def user_profile(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = BlogPost.query.filter_by(user=user).order_by(BlogPost.created_at.desc()).all()
+    return render_template('user_profile.html', user=user, posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

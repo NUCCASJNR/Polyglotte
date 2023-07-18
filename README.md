@@ -66,3 +66,5 @@ cat setup_mysql_dev.sql | sudo mysql
 4. Explore the platform to discover other users and their blog posts.
 5. Follow other users to receive updates on their new posts.
 6. Like and comment on blog posts to engage with the community.
+
+🔗 Check it out: polyglotte.tech

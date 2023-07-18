@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h1>{{ user.username }}'s Profile</h1>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ user.username }}</h5>
+            <p class="card-text">Email: {{ user.email }}</p>
+            <p class="card-text">First Name: {{ user.first_name }}</p>
+            <p class="card-text">Last Name: {{ user.last_name }}</p>
+          </div>
+        </div>
+        <h2>{{ user.username }}'s Blog Posts</h2>
+        {% if posts %}
+          <ul class="list-group">
+            {% for post in posts %}
+              <li class="list-group-item">
+                <h5>{{ post.title }}</h5>
+                <p>{{ post.content }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>No blog posts found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
