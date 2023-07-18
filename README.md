@@ -67,4 +67,4 @@ cat setup_mysql_dev.sql | sudo mysql
 5. Follow other users to receive updates on their new posts.
 6. Like and comment on blog posts to engage with the community.
 
-🔗 Check it out: polyglotte.tech
+🔗 Check it out: [polyglotte.tech](https://polyglotte.tech/)
